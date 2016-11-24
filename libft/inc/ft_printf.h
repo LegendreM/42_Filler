@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include "libft.h"
 # include <stdlib.h>
+# include <inttypes.h>
 # define SHORT_TO_INT_NEGATIVE_MASK	0xffff0000
 # define SHORT_VALUE_MASK			0x0000ffff
 # define SHORT_SIGN_MASK				0x00008000

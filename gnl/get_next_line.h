@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <stdlib.h>
-# include "libft/includes/libft.h"
+# include "libft.h"
 # include <fcntl.h>
 
 typedef struct		s_read
