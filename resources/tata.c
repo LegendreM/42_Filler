@@ -1,5 +1,6 @@
 #define BUFFSIZE 8
 #define FD 0
+#define PLAYER_NAME "[players/tata.filler]"
 
 #include <sys/types.h>//read
 #include <sys/uio.h>//read
@@ -48,6 +49,26 @@ void	ft_board_size(char *start, int board_coord[2])
 	return ;
 }
 
+int	ft_player_number(char *start)
+{
+	return(ft_atoi(&start[-4]));
+}
+
+void	ft_play(int x, int y)
+{
+	char* x_str;
+	char* y_str;
+
+	if((x_str = ft_itoa(x)) && (y_str = ft_itoa(y)))
+	{
+		write(1, x_str, ft_strlen(x_str));
+		write(1, " ", 1);
+		write(1, y_str, ft_strlen(y_str));
+		write(1, "\n", 1);
+	}
+	return ;
+}
+
 void	ft_check_plateau(char *str)
 {
 	int i;
@@ -61,15 +82,16 @@ void	ft_check_plateau(char *str)
 	{
 		if((start = ft_strstr((const char*)str, "Plateau ")))
 		{
-			ft_board_size(start, board_coord);
-			ft_putstr_fd("\n", 2);//
-			ft_putstr_fd(ft_itoa(board_coord[0]), 2);//
-			ft_putstr_fd(" ", 2);//
-			ft_putstr_fd(ft_itoa(board_coord[1]), 2);//
-			ft_putstr_fd("\n", 2);//
+			ft_board_size(start, board_coord); // board size
 		}
-		else
-			ft_putstr_fd("not yet", 2);
+		if ((start = ft_strstr((const char*)str, PLAYER_NAME)))
+		{
+			ft_putstr_fd(ft_itoa(ft_player_number(start)), 2); //player number... useless?
+		}
+		if ((start = ft_strstr((const char*)str, "Piece ")))
+		{
+			ft_play(8, 2); 
+		}
 	}
 	return ;
 }
