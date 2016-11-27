@@ -14,7 +14,7 @@ NAME = mlxlibft.a
 
 SRC = 	new_mlx_image_8u.c pixel_8u.c red_8u.c green_8u.c blue_8u.c alpha_8u.c \
 		free_mlx_image_8u.c new_mlx_xpm_image_8u.c get_pixel_8u.c new_pixel_8u.c \
-		draw_square.c build_roi.c
+		draw_square.c build_roi.c red_cross.c
 
 OBJS = $(SRC:.c=.o)
 

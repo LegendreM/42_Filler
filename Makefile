@@ -1,7 +1,6 @@
-NAME = wolf3d
+NAME = fillit
 
-FUNC = main parse ret_error raycast gnl/get_next_line aa_corection minimap loop_hook attempt_to_move expose check_horizontal check_vertical \
-		greater tag put_tag red_cross
+FUNC = main gnl/get_next_line loop_hook expose
 
 SRC = $(addsuffix .c, $(FUNC))
 
@@ -18,10 +17,10 @@ ILL = 'free'
 all: lib $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(FLAGS) -o $@ $^ mlxlibft/mlxlibft.a libft/libft.a -lmlx -framework OpenGL -framework AppKit
+	@$(CC) $(FLAGS) -o $@ $^ mlxlibft/mlxlibft.a libft/libftprintf.a -lmlx -framework OpenGL -framework AppKit
 
-%.o: %.c
-	@$(CC) $(FLAGS) -o $@ -c $< -I include/ -I mlxlibft/
+%.o: src/%.c
+	@$(CC) $(FLAGS) -o $@ -c $< -I inc/ -I mlxlibft/
 
 lib:
 	@make -C libft/

@@ -1,5 +1,6 @@
 #ifndef FILLER_H
 # define FILLER_H
+# include "mlxlibft.h"
 /*
 @name: t_coord
 @brief: struct wich contain coord
@@ -44,11 +45,18 @@ typedef struct	s_params
 	t_coord		coord;
 }				t_params;
 
+typedef struct	s_env
+{
+	t_mlx_env		*mlx; 
+	t_mlx_image_8u	*win_img;
+}				t_env;
+
 void	draw_rack_in_image(
 		t_mlx_image_8u *dst,
 		const t_roi roi,
 		const t_pixel_8u color,
 		const t_coord rack_size
 		);
-
+int		loop_hook(t_env *env);
+int		expose(t_env *env);
 #endif

@@ -13,13 +13,17 @@
 #ifndef MLXLIBFT_H
 # define MLXLIBFT_H
 # include <mlx.h>
+# define KEYPRESSMASK (1L<<0)
+# define KEYRELEASEMASK (1L<<1)
+# define KEYPRESS 2
+# define KEYRELEASE 3
 
 typedef unsigned char	t_sample_8u;
 
 typedef struct	s_mlx_env
 {
-	void		*mlx_ptr;
-	void		*mlx_win;
+	void		*ptr;
+	void		*win;
 	int			win_width;
 	int			win_height;
 }				t_mlx_env;

@@ -19,9 +19,9 @@ int	draw_square(t_mlx_image_8u *dst, const t_roi square, const t_pixel_8u color)
 	int			y;
 	int			x;
 
-	if (square.x < 0 || max_x > dst.width)
+	if (square.x < 0 || max_x > dst->width)
 		return (1);
-	if (square.y < 0 || max_y > dst.height)
+	if (square.y < 0 || max_y > dst->height)
 		return (1);
 	y = square.y;
 	while (y < max_y)
