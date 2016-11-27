@@ -16,6 +16,14 @@
 
 typedef unsigned char	t_sample_8u;
 
+typedef struct	s_mlx_env
+{
+	void		*mlx_ptr;
+	void		*mlx_win;
+	int			win_width;
+	int			win_height;
+}				t_mlx_env;
+
 typedef	struct	s_mlx_image_8u
 {
 	void		*ptr;
@@ -54,5 +62,8 @@ void			pixel_8u(t_mlx_image_8u *image, int x, int y,
 t_pixel_8u		get_pixel_8u(t_mlx_image_8u *image, int x, int y);
 t_pixel_8u		new_pixel_8u(t_sample_8u red, t_sample_8u green,
 						t_sample_8u blue, t_sample_8u alpha);
-
+int				draw_square(t_mlx_image_8u *dst,
+						const t_roi square, const t_pixel_8u color);
+t_roi			build_roi(int x, int y, int width, int height);
+int				red_cross(int r);
 #endif

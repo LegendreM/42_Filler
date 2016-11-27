@@ -44,4 +44,11 @@ typedef struct	s_params
 	t_coord		coord;
 }				t_params;
 
+void	draw_rack_in_image(
+		t_mlx_image_8u *dst,
+		const t_roi roi,
+		const t_pixel_8u color,
+		const t_coord rack_size
+		);
+
 #endif
