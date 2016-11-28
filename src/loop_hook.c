@@ -15,6 +15,7 @@
 int			loop_hook(t_env *env)
 {
 	(void)env;
+	clear_image_8u(env->win_img, create_pixel_8u(0x2f, 0x2f, 0x2f, 0x00));
 	/* Parser */
 	/* AI */
 	return (0);

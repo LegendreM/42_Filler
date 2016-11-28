@@ -4,7 +4,7 @@
 void	draw_rack_in_image(
 		t_mlx_image_8u *dst,
 		const t_roi roi,
-		const t_pixel_8u color,
+		const t_pixel_8u pixel,
 		const t_coord rack_size
 		)
 {
@@ -19,7 +19,7 @@ void	draw_rack_in_image(
 	while (rack_coord.y < rack_size.y)
 	{
 		draw_square(dst, build_roi(img_coord.x, img_coord.y,
-					case_size.x * rack_size.x, 1), color)
+					case_size.x * rack_size.x, 1), pixel)
 		img_coord.y += case_size.y;
 		++rack_coord.y;
 	}
@@ -28,7 +28,7 @@ void	draw_rack_in_image(
 	while (rack_coord.x < rack_size.x)
 	{
 		draw_square(dst, build_roi(img_coord.x, img_coord.y, 1,
-					case_size.y * rack_size.y), color)
+					case_size.y * rack_size.y), pixel)
 		img_coord.x += case_size.x;
 		++rack_coord.x;
 	}
