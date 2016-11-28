@@ -1,4 +1,4 @@
-NAME = fillit
+NAME = filler
 
 FUNC = main gnl/get_next_line loop_hook expose
 

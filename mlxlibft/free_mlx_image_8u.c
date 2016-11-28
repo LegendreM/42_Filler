@@ -12,6 +12,7 @@
 
 #include "mlxlibft.h"
 #include <stdlib.h>
+#include <mlx.h>
 
 void	free_mlx_image_8u(void *mlx_ptr, t_mlx_image_8u *image)
 {

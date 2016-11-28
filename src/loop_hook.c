@@ -15,5 +15,7 @@
 int			loop_hook(t_env *env)
 {
 	(void)env;
+	/* Parser */
+	/* AI */
 	return (0);
 }

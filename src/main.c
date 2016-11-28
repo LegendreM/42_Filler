@@ -13,6 +13,7 @@
 #include "filler.h"
 #include "mlxlibft.h"
 #include <stdlib.h>
+#include <mlx.h>
 
 static int	key_press(int keycode, t_env *env)
 {
@@ -32,17 +33,24 @@ static int	key_release(int keycode, t_env *env)
 
 int			main(void)
 {
+	t_mlx_env		mlx;
 	t_env			env;
-	if (!(env.mlx.ptr = mlx_init()))
+
+	mlx.win_width = 800;
+	mlx.win_height = 600;
+	if (!(mlx.ptr = mlx_init()))
 		return (1);
-	if (!(env.mlx.win = mlx_new_window(env.mlx.ptr,
-		env.mlx.win_width, env.mlx.win_height, "fillit")))
+	if (!(mlx.win = mlx_new_window(mlx.ptr,
+		mlx.win_width, mlx.win_height, "filler")))
 		return (1);
-	mlx_expose_hook(env.mlx.win, expose, &env);
-	mlx_hook(env.mlx.win, KEYPRESS, KEYPRESSMASK, key_press, &env);
-	mlx_hook(env.mlx.win, KEYRELEASE, KEYRELEASEMASK, key_release, &env);
-	mlx_hook(env.mlx.win, 17, (1L << 17), red_cross, 0);
-	mlx_loop_hook(env.mlx.ptr, loop_hook, &env);
-	mlx_loop(env.mlx.ptr);
+	env.mlx = &mlx;
+	env.win_img = new_mlx_image_8u(
+					env.mlx->ptr, env.mlx->win_width, env.mlx->win_height);
+	mlx_hook(env.mlx->win, KEYPRESS, KEYPRESSMASK, key_press, &env);
+	mlx_hook(env.mlx->win, KEYRELEASE, KEYRELEASEMASK, key_release, &env);
+	mlx_hook(env.mlx->win, REDCROSS, REDCROSSMASK, red_cross, 0);
+	mlx_loop_hook(env.mlx->ptr, loop_hook, &env);
+	mlx_expose_hook(env.mlx->win, expose, &env);
+	mlx_loop(env.mlx->ptr);
 	return (0);
 }

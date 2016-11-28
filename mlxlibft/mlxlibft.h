@@ -12,11 +12,12 @@
 
 #ifndef MLXLIBFT_H
 # define MLXLIBFT_H
-# include <mlx.h>
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASEMASK (1L<<1)
+# define REDCROSSMASK (1L<<17)
 # define KEYPRESS 2
 # define KEYRELEASE 3
+# define REDCROSS 17
 
 typedef unsigned char	t_sample_8u;
 
