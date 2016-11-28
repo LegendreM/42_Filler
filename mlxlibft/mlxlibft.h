@@ -18,8 +18,10 @@
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define REDCROSS 17
+# define PACKED __attribute__((packed))
 
 typedef unsigned char	t_sample_8u;
+typedef unsigned int	t_color_8u;
 
 typedef struct	s_mlx_env
 {
@@ -47,11 +49,11 @@ typedef	struct	s_roi
 
 typedef	struct	s_pixel_8u
 {
-	t_sample_8u	red;
-	t_sample_8u	green;
 	t_sample_8u	blue;
+	t_sample_8u	green;
+	t_sample_8u	red;
 	t_sample_8u	alpha;
-}				t_pixel_8u;
+} 	PACKED		t_pixel_8u;
 
 t_mlx_image_8u	*new_mlx_image_8u(void *mlx_ptr, int width, int height);
 t_mlx_image_8u	*new_mlx_xpm_image_8u(void *mlx_ptr, char *filename);
@@ -65,10 +67,11 @@ void			alpha_8u(t_mlx_image_8u *image, int x, int y,
 void			pixel_8u(t_mlx_image_8u *image, int x, int y,
 						t_pixel_8u pixel);
 t_pixel_8u		get_pixel_8u(t_mlx_image_8u *image, int x, int y);
-t_pixel_8u		new_pixel_8u(t_sample_8u red, t_sample_8u green,
+t_pixel_8u		create_pixel_8u(t_sample_8u red, t_sample_8u green,
 						t_sample_8u blue, t_sample_8u alpha);
 int				draw_square(t_mlx_image_8u *dst,
-						const t_roi square, const t_pixel_8u color);
-t_roi			build_roi(int x, int y, int width, int height);
+						const t_roi square, const t_pixel_8u pixel);
+t_roi			create_roi(int x, int y, int width, int height);
 int				red_cross(int r);
+int				clear_image_8u(t_mlx_image_8u *image, const t_pixel_8u pixel);
 #endif

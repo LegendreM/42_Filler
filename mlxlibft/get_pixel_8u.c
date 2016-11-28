@@ -24,5 +24,5 @@ t_pixel_8u	get_pixel_8u(t_mlx_image_8u *image, int x, int y)
 	g = *(((t_sample_8u *)&((((int *)image->data)[pos]))) + 1);
 	r = *(((t_sample_8u *)&((((int *)image->data)[pos]))) + 2);
 	a = *(((t_sample_8u *)&((((int *)image->data)[pos]))) + 3);
-	return (new_pixel_8u(r, g, b, a));
+	return (create_pixel_8u(r, g, b, a));
 }
