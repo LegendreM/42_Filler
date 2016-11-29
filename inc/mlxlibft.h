@@ -1,1 +1,1 @@
-../mlxlibft/mlxlibft.h
+../mlxlibft/inc/mlxlibft.h

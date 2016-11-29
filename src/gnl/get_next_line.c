@@ -3,121 +3,133 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmejia <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/08 17:00:13 by mlegendr          #+#    #+#             */
-/*   Updated: 2014/12/08 17:00:18 by mlegendr         ###   ########.fr       */
+/*   Created: 2016/09/05 16:22:08 by dmejia            #+#    #+#             */
+/*   Updated: 2016/09/05 16:24:04 by dmejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int			return_free(int r, char *s1, char *s2)
+char				*ft_strjoin_and_free(char *s1, char *s2)
 {
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
-	return (r);
-}
+	size_t			lens1;
+	size_t			lens2;
+	char			*newstr;
 
-static int			ft_read(t_read *elem, int const fd)
-{
-	size_t		ret;
-	char		*buf;
-	char		*str;
-	char		*stmp;
-
-	str = NULL;
-	elem->fd = fd;
-	elem->next = NULL;
-	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		return (0);
-	while ((ret = read(fd, buf, BUFF_SIZE)))
+	lens1 = 0;
+	lens2 = 0;
+	if (s1 && s2)
 	{
-		if ((int)ret < 0)
-			return (return_free(0, str, buf));
-		buf[ret] = 0;
-		if (ft_strlen(buf) != ret)
-			return (return_free(0, str, buf));
-		if (!(stmp = ft_strjoin(str, buf)))
-			return (return_free(0, str, buf));
-		free(str);
-		str = stmp;
+		lens1 = ft_strlen(s1);
+		lens2 = ft_strlen(s2);
+		newstr = ft_strnew(lens1 + lens2 + 1);
+		if (newstr)
+		{
+			newstr = ft_strcat(newstr, s1);
+			newstr = ft_strcat(newstr, s2);
+			free(s1);
+			return (newstr);
+		}
 	}
-	free(buf);
-	elem->read = str;
-	return ((elem->read_cpy = elem->read) ? 1 : 1);
+	return (NULL);
 }
 
-static t_read		*ft_unread_fd(t_read **lst, int fd)
+static t_tools		*ft_distrib_fd(int const fd, t_list **list)
 {
-	t_read		*cpy;
+	t_list			*list_tmp;
+	t_tools			*tools;
 
-	cpy = (*lst);
-	while (cpy)
+	list_tmp = *list;
+	while (list_tmp)
 	{
-		if (cpy->fd == fd)
-			return (cpy);
-		cpy = cpy->next;
+		tools = (t_tools*)list_tmp->content;
+		if (fd == tools->fd)
+			return (tools);
+		list_tmp = list_tmp->next;
 	}
-	if (!(cpy = (t_read*)malloc(sizeof(t_read))))
+	if (!(list_tmp = (t_list*)ft_memalloc(sizeof(t_list))))
 		return (NULL);
-	if (!(ft_read(cpy, fd)))
+	list_tmp->next = NULL;
+	if (!(tools = (t_tools*)ft_memalloc(sizeof(t_tools))))
 		return (NULL);
-	cpy->next = *lst;
-	(*lst) = cpy;
-	return (cpy);
+	tools->fd = fd;
+	tools->stock = ft_strnew(0);
+	list_tmp->content = (t_tools*)tools;
+	ft_lstadd(list, list_tmp);
+	return (tools);
 }
 
-static int			ft_line(t_read *elem, char **line)
+static int			ft_check_stock(t_tools **tools, char **line)
 {
-	size_t		i;
-	char		*str;
-	size_t		len;
+	int				i;
+	int				len;
+	char			*tmp_stock;
 
 	i = 0;
-	len = 0;
-	if (!elem->read_cpy)
-		return (0);
-	if (!(str = elem->read) && ft_strlen(elem->read_cpy))
+	if ((*tools)->stock != NULL)
+	{
+		while ((*tools)->stock[i])
+		{
+			if ((*tools)->stock[i] == '\n')
+			{
+				tmp_stock = (*tools)->stock;
+				*line = ft_strndup((*tools)->stock, i);
+				len = (int)ft_strlen((*tools)->stock);
+				++i;
+				(*tools)->stock = ft_strsub((*tools)->stock, i, len);
+				free(tmp_stock);
+				return (1);
+			}
+			++i;
+		}
+	}
+	return (0);
+}
+
+static int			ft_reader(t_tools **tools, char **line)
+{
+	char			*buf;
+	int				lu;
+	int				ok;
+
+	ok = 0;
+	lu = 0;
+	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	while ((lu = read((*tools)->fd, buf, BUFF_SIZE)) > 0)
+	{
+		buf[lu] = '\0';
+		(*tools)->stock = ft_strjoin_and_free((*tools)->stock, buf);
+		if (ft_check_stock(tools, *&line) && (ok = 1))
+			break ;
+		ok = 2;
+	}
+	ft_strdel(&buf);
+	if (lu < 0)
 		return (-1);
-	if (*str == 0)
-		return (0);
-	while (str[len] != 0 && str[len] != '\n')
-		len++;
-	if (!((*line) = (char*)malloc(sizeof(char) * (len + 1))))
-		return (-1);
-	while ((*str) != '\0' && (*str) != '\n')
-		(*line)[i++] = *str++;
-	(*line)[i] = 0;
-	elem->read = (elem->read) + i + 1;
-	return (1);
+	if (ok == 2)
+	{
+		lu = ft_strlen((*tools)->stock);
+		*line = ft_strndup((*tools)->stock, lu);
+		return (1);
+	}
+	return (ok);
 }
 
 int					get_next_line(int const fd, char **line)
 {
-	static t_read		**lst = NULL;
-	t_read				*tmp;
-	int					res;
+	static t_list	*list = NULL;
+	t_tools			*tools;
+	int				ret;
 
-	if (*line)
-		free(*line);
-	if (fd < 0 || BUFF_SIZE <= 0)
+	ret = 0;
+	if (fd < 0 || !line || BUFF_SIZE <= 0)
 		return (-1);
-	if (!lst)
-	{
-		if (!(lst = (t_read**)malloc(sizeof(lst))))
-			return (-1);
-		*lst = NULL;
-	}
-	if (!(tmp = ft_unread_fd(lst, fd)))
+	if (!(tools = ft_distrib_fd(fd, &list)))
 		return (-1);
-	if ((res = ft_line(tmp, line)) == 0)
-	{
-		tmp->read = NULL;
-		if (tmp->read_cpy)
-			free(tmp->read_cpy);
-	}
-	return (res);
+	if ((ret = ft_check_stock(&tools, &*line)))
+		return (ret);
+	ret = ft_reader(&tools, &*line);
+	return (ret);
 }
