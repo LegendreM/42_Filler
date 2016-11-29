@@ -55,6 +55,12 @@ typedef	struct	s_pixel_8u
 	t_sample_8u	alpha;
 } 	PACKED		t_pixel_8u;
 
+typedef struct	s_coord
+{
+	int			x;
+	int			y;
+}				t_coord;
+
 t_mlx_image_8u	*new_mlx_image_8u(void *mlx_ptr, int width, int height);
 t_mlx_image_8u	*new_mlx_xpm_image_8u(void *mlx_ptr, char *filename);
 void			free_mlx_image_8u(void *mlx_ptr, t_mlx_image_8u *image);
@@ -74,4 +80,16 @@ int				draw_square(t_mlx_image_8u *dst,
 t_roi			create_roi(int x, int y, int width, int height);
 int				red_cross(int r);
 int				clear_image_8u(t_mlx_image_8u *image, const t_pixel_8u pixel);
+void			draw_rack_in_image(
+				t_mlx_image_8u *dst,
+				const t_roi roi,
+				const t_pixel_8u pixel,
+				const t_coord rack_size
+				);
+void			draw_game_rack(
+				t_env *env,
+				const t_pixel_8u pixel,
+				const int rack_width,
+				const int rack_height
+				);
 #endif
