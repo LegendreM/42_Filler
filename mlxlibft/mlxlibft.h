@@ -18,7 +18,6 @@
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define REDCROSS 17
-# define PACKED __attribute__((packed))
 
 typedef unsigned char	t_sample_8u;
 typedef unsigned int	t_color_8u;
@@ -53,7 +52,7 @@ typedef	struct	s_pixel_8u
 	t_sample_8u	green;
 	t_sample_8u	red;
 	t_sample_8u	alpha;
-} 	PACKED		t_pixel_8u;
+}				t_pixel_8u;
 
 typedef struct	s_coord
 {
@@ -80,16 +79,18 @@ int				draw_square(t_mlx_image_8u *dst,
 t_roi			create_roi(int x, int y, int width, int height);
 int				red_cross(int r);
 int				clear_image_8u(t_mlx_image_8u *image, const t_pixel_8u pixel);
-void			draw_rack_in_image(
+void			draw_rack(
 				t_mlx_image_8u *dst,
 				const t_roi roi,
 				const t_pixel_8u pixel,
-				const t_coord rack_size
-				);
-void			draw_game_rack(
-				t_env *env,
-				const t_pixel_8u pixel,
-				const int rack_width,
-				const int rack_height
-				);
+				const t_coord rack_size);
+void			draw_circle(
+				t_mlx_image_8u *dst,
+				const t_coord coord,
+				const int radius,
+				const t_pixel_8u pixel);
+void			draw_circle_in_roi(
+				t_mlx_image_8u *dst,
+				const t_roi roi,
+				const t_pixel_8u pixel);
 #endif
