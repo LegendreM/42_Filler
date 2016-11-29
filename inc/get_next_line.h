@@ -1,1 +1,1 @@
-src/gnl/get_next_line.h
+../src/gnl/get_next_line.h
