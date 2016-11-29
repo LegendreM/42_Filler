@@ -69,7 +69,7 @@ void	ft_play(int x, int y)
 	return ;
 }
 
-void	ft_check_plateau(char *str)
+void	ft_check_plateau(char *str, char *map)
 {
 	int i;
 	int board_coord[2];
@@ -86,11 +86,12 @@ void	ft_check_plateau(char *str)
 		}
 		if ((start = ft_strstr((const char*)str, PLAYER_NAME)))
 		{
-			ft_putstr_fd(ft_itoa(ft_player_number(start)), 2); //player number... useless?
+			// ft_putstr_fd(ft_itoa(ft_player_number(start)), 2); //player number... useless?
 		}
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_play(8, 2); 
+			ft_putstr_fd(map, 2);
+			ft_play(8, 2);
 		}
 	}
 	return ;
@@ -101,21 +102,46 @@ void	ft_read()
 {
 	char*	line;
 	char*	stock;
+	char*	map;
 	int		ret;
 
+	if (!(map = ft_strnew(BUFFSIZE)))
+		return ;
 	if (!(line = ft_strnew(BUFFSIZE)))
 		return ;
 	if (!(stock = ft_strnew(BUFFSIZE)))
 		return ;
-	while((ret = read(FD, line, BUFFSIZE)) > 0)
+	while((ret = get_next_line(FD, &line)) > 0)
 	{
-		line[ret] = '\0';
+		if(ft_isdigit(line[0]))
+		{
+			map = ft_mystrjoin_and_free(map, line);
+		}
 		stock = ft_mystrjoin_and_free(stock, line);
-		ft_check_plateau(stock);
+		ft_check_plateau(stock, map);
 	}
-
 	return ;
 }
+
+// void	ft_read()
+// {
+// 	char*	line;
+// 	char*	stock;
+// 	int		ret;
+
+// 	if (!(line = ft_strnew(BUFFSIZE)))
+// 		return ;
+// 	if (!(stock = ft_strnew(BUFFSIZE)))
+// 		return ;
+// 	while((ret = read(FD, line, BUFFSIZE)) > 0)
+// 	{
+// 		line[ret] = '\0';
+// 		stock = ft_mystrjoin_and_free(stock, line);
+// 		ft_check_plateau(stock);
+// 	}
+
+// 	return ;
+// }
 
 int	main(void)
 {
