@@ -9,29 +9,30 @@
 #include "get_next_line.h"
 #include "Filler.h"
 
-char	*ft_mystrjoin_and_free(char *s1, char *s2)
+char	**ft_matrixnew(const size_t y, const size_t x)
 {
-	size_t			lens1;
-	size_t			lens2;
-	char			*newstr;
+	char		**map;
+	size_t		i;
+	size_t		size;
 
-	lens1 = 0;
-	lens2 = 0;
-	if (s1 && s2)
+	size = y * (x + 1);
+	if (!(map = (char**)malloc(sizeof(char*) * y + 1)))
+		return (NULL);
+	map[y] = NULL;
+	if (!(map[0] = (char*)malloc(sizeof(char) * size)))
+		return (NULL);
+	ft_bzero(map[0], size);
+
+	i = 1;
+	while (i < y)
 	{
-		lens1 = ft_strlen(s1);
-		lens2 = ft_strlen(s2);
-		newstr = ft_strnew(lens1 + lens2);
-		if (newstr)
-		{
-			newstr = ft_strcat(newstr, s1);
-			newstr = ft_strcat(newstr, s2);
-			ft_strdel(&s1);
-			return (newstr);
-		}
+		// map[i] = &(map[i - 1][height + 1]);
+		map[i] = map[i - 1] + x + 1;
+		i++;
 	}
-	return (NULL);
+	return (map);
 }
+
 
 t_params	*ft_init_board(char *start, t_params *params) //work
 {
@@ -42,11 +43,13 @@ t_params	*ft_init_board(char *start, t_params *params) //work
 	while(ft_isalpha(start[i]))
 		++i;
 	++i;
-	
-	params->board_size.x = ft_atoi(&start[i]);
+
+	params->board_size.y = ft_atoi(&start[i]);
 	while(ft_isdigit(start[i]))
 		++i;
-	params->board_size.y = ft_atoi(&start[i]);
+	params->board_size.x = ft_atoi(&start[i]);
+	params->game_board = ft_matrixnew(params->board_size.y,
+							params->board_size.x);
 	params->player = 0;
 	params->count_line = 0;
 	return (params);
@@ -79,35 +82,15 @@ void	ft_play(int x, int y) //work
 	return ;
 }
 
-// char	**ft_matrixnew(const size_t width, const size_t height)
-// {
-// 	char		**map;
-// 	int 		i = 0;
-// 	size_t		size;
-
-// 	size = width * (height + 1);
-// 	if (!(map = (char**)malloc(sizeof(char*) * width + 1)))
-// 		return (NULL);	
-// 	map[width] = NULL;
-// 	if (!(map[0] = (char*)malloc(sizeof(char) * size)))
-// 		return (NULL);
-// 	ft_bzero(map[0], size);
-
-// 	i = 1;
-// 	while (map[i])
-// 	{
-// 		// map[i] = &(map[i - 1][height + 1]);
-// 		map[i] =  map[i - 1] + height + 1;
-// 	}
-// 	return (map);
-// }
-
-
-// void	ft_save_map(char *str, t_params *params)
-// {
-// 	params->game_board = ft_matrixnew(params->board_size->x, params->board_size->y);
-// 	return ;
-// }
+void		ft_fill_matrix(const char *line, t_params *params)
+{
+	ft_strncpy(
+		params->game_board[params->count_line],
+		line + 4,
+		params->board_size.x
+	);
+	params->count_line++;
+}
 
 t_params	*ft_check_input(char *str, t_params *params) //work but useless
 {
@@ -127,18 +110,24 @@ t_params	*ft_check_input(char *str, t_params *params) //work but useless
 		}
 		if (ft_isdigit(str[0]))
 		{
-			// ft_save_map(str, params); // on working
-			// ++params->count_line;
+			ft_fill_matrix((const char *)str, params);
 		}
-
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_play(0, 0);
+			ft_play(0, 0); // need to work on that
 		}
 	}
 	return (params);
 }
 
+void	print_matrix(char **map)
+{
+	while (*map)
+	{
+//		ft_putstr_fd("Iter : ", 2);
+		ft_putendl_fd(*map++, 2);
+	}
+}
 
 void	ft_read()
 {
@@ -154,6 +143,8 @@ void	ft_read()
 	{
 		params = ft_check_input(line, params);
 	}
+	// It returns a filled matrix, now need to check if it works multiple times
+	print_matrix(params->game_board);
 	return ;
 }
 

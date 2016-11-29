@@ -41,8 +41,8 @@ typedef struct	s_coord
 
 typedef struct	s_params
 {
-	int			count_line;
 	char		player;
+	int			count_line;
 	char		**game_board;
 	char		**game_piece;
 	t_coord		board_size;
