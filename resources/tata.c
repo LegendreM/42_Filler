@@ -67,6 +67,34 @@ int	ft_player_number(char *start, t_params *params) //work
 	return (0);
 }
 
+void	ft_get_piece(char *line, t_params *params)
+{
+	int		i;
+
+	i = 0;
+	while(ft_isalpha(line[i]) || line[i] == ' ')
+		++i;
+	params->piece_size.y = ft_atoi(&line[i]);
+	while(ft_isdigit(line[i]))
+		++i;
+	params->piece_size.x = ft_atoi(&line[i]);
+	params->game_piece = ft_matrixnew(
+							params->piece_size.y,
+							params->piece_size.x
+						);
+	i = 0;
+	while (i < params->piece_size.y)
+	{
+		get_next_line(FD, &line);
+		ft_strncpy(
+			params->game_piece[i],
+			line,
+			params->piece_size.x
+		);
+		i++;
+	}
+}
+
 void	ft_play(int x, int y) //work
 {
 	char* x_str;
@@ -114,7 +142,8 @@ t_params	*ft_check_input(char *str, t_params *params) //work but useless
 		}
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_play(0, 0); // need to work on that
+			ft_get_piece(start, params); // need to work on that
+			ft_play(0, 0);
 		}
 	}
 	return (params);
@@ -145,6 +174,7 @@ void	ft_read()
 	}
 	// It returns a filled matrix, now need to check if it works multiple times
 	print_matrix(params->game_board);
+	print_matrix(params->game_piece);
 	return ;
 }
 

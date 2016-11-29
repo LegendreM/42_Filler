@@ -46,12 +46,13 @@ typedef struct	s_params
 	char		**game_board;
 	char		**game_piece;
 	t_coord		board_size;
+	t_coord		piece_size;
 	t_coord		coord;
 }				t_params;
 
 typedef struct	s_env
 {
-	t_mlx_env		*mlx; 
+	t_mlx_env		*mlx;
 	t_mlx_image_8u	*win_img;
 }				t_env;
 
