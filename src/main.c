@@ -36,7 +36,7 @@ int			main(void)
 	t_mlx_env		mlx;
 	t_env			env;
 
-	mlx.win_width = 800;
+	mlx.win_width = 1200;
 	mlx.win_height = 600;
 	if (!(mlx.ptr = mlx_init()))
 		return (1);
