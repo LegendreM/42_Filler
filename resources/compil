@@ -1,0 +1,2 @@
+gcc -Wall -Wextra -Werror tata.c ../src/gnl/get_next_line.c -I ../inc -L ../libft/ -lftprintf -o players/tata.filler
+./filler_vm -f maps/map00 -p1 players/tata.filler 2>tata.log
