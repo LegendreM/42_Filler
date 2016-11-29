@@ -33,28 +33,38 @@ char	*ft_mystrjoin_and_free(char *s1, char *s2)
 	return (NULL);
 }
 
-void	ft_board_size(char *start, int board_coord[2])
+t_params	*ft_init_board(char *start, t_params *params) //work
 {
 	int i;
 
 	i = 0;
-
+	params = (t_params*)malloc(sizeof(t_params));
 	while(ft_isalpha(start[i]))
 		++i;
 	++i;
-	board_coord[0] = ft_atoi(&start[i]);
+	
+	params->board_size.x = ft_atoi(&start[i]);
 	while(ft_isdigit(start[i]))
 		++i;
-	board_coord[1] = ft_atoi(&start[i]);
-	return ;
+	params->board_size.y = ft_atoi(&start[i]);
+	params->player = 0;
+	params->count_line = 0;
+	return (params);
 }
 
-int	ft_player_number(char *start)
+int	ft_player_number(char *start, t_params *params) //work
 {
-	return(ft_atoi(&start[-4]));
+
+	if (ft_atoi(&start[-4]) == 1)
+		params->player = 'o';
+	else if (ft_atoi(&start[-4]) == 2)
+		params->player = 'x';
+	else
+		return (-1);
+	return (0);
 }
 
-void	ft_play(int x, int y)
+void	ft_play(int x, int y) //work
 {
 	char* x_str;
 	char* y_str;
@@ -69,79 +79,83 @@ void	ft_play(int x, int y)
 	return ;
 }
 
-void	ft_check_plateau(char *str, char *map)
+// char	**ft_matrixnew(const size_t width, const size_t height)
+// {
+// 	char		**map;
+// 	int 		i = 0;
+// 	size_t		size;
+
+// 	size = width * (height + 1);
+// 	if (!(map = (char**)malloc(sizeof(char*) * width + 1)))
+// 		return (NULL);	
+// 	map[width] = NULL;
+// 	if (!(map[0] = (char*)malloc(sizeof(char) * size)))
+// 		return (NULL);
+// 	ft_bzero(map[0], size);
+
+// 	i = 1;
+// 	while (map[i])
+// 	{
+// 		// map[i] = &(map[i - 1][height + 1]);
+// 		map[i] =  map[i - 1] + height + 1;
+// 	}
+// 	return (map);
+// }
+
+
+// void	ft_save_map(char *str, t_params *params)
+// {
+// 	params->game_board = ft_matrixnew(params->board_size->x, params->board_size->y);
+// 	return ;
+// }
+
+t_params	*ft_check_input(char *str, t_params *params) //work but useless
 {
 	int i;
-	int board_coord[2];
 	char* start;
 
 	i = 0;
-	board_coord[0] = 0;
-	board_coord[1] = 0;
-	if(str)
+	if (str)
 	{
-		if((start = ft_strstr((const char*)str, "Plateau ")))
+		if (params == NULL && (start = ft_strstr((const char*)str, "Plateau ")))
 		{
-			ft_board_size(start, board_coord); // board size
+			params = ft_init_board(start, params); // board size
 		}
-		if ((start = ft_strstr((const char*)str, PLAYER_NAME)))
+		if (params != NULL && params->player == 0 && (start = ft_strstr((const char*)str, PLAYER_NAME)))
 		{
-			// ft_putstr_fd(ft_itoa(ft_player_number(start)), 2); //player number... useless?
+			ft_player_number(start, params);
 		}
+		if (ft_isdigit(str[0]))
+		{
+			// ft_save_map(str, params); // on working
+			// ++params->count_line;
+		}
+
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_putstr_fd(map, 2);
-			ft_play(8, 2);
+			ft_play(0, 0);
 		}
 	}
-	return ;
+	return (params);
 }
 
 
 void	ft_read()
 {
-	char*	line;
-	char*	stock;
-	char*	map;
-	int		ret;
+	char		*line;
+	char		*map;
+	t_params	*params;
+	int			ret;
 
+	params = NULL;
 	if (!(map = ft_strnew(BUFFSIZE)))
 		return ;
-	if (!(line = ft_strnew(BUFFSIZE)))
-		return ;
-	if (!(stock = ft_strnew(BUFFSIZE)))
-		return ;
-	while((ret = get_next_line(FD, &line)) > 0)
+	while ((ret = get_next_line(FD, &line)) > 0)
 	{
-		if(ft_isdigit(line[0]))
-		{
-			map = ft_mystrjoin_and_free(map, line);
-		}
-		stock = ft_mystrjoin_and_free(stock, line);
-		ft_check_plateau(stock, map);
+		params = ft_check_input(line, params);
 	}
 	return ;
 }
-
-// void	ft_read()
-// {
-// 	char*	line;
-// 	char*	stock;
-// 	int		ret;
-
-// 	if (!(line = ft_strnew(BUFFSIZE)))
-// 		return ;
-// 	if (!(stock = ft_strnew(BUFFSIZE)))
-// 		return ;
-// 	while((ret = read(FD, line, BUFFSIZE)) > 0)
-// 	{
-// 		line[ret] = '\0';
-// 		stock = ft_mystrjoin_and_free(stock, line);
-// 		ft_check_plateau(stock);
-// 	}
-
-// 	return ;
-// }
 
 int	main(void)
 {

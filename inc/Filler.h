@@ -38,10 +38,14 @@ typedef struct	s_coord
 	@name: coord
 	@brief: struct wich contain coord of game_piece
 */
+
 typedef struct	s_params
 {
+	int			count_line;
+	char		player;
 	char		**game_board;
 	char		**game_piece;
+	t_coord		board_size;
 	t_coord		coord;
 }				t_params;
 
