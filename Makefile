@@ -23,6 +23,7 @@ SRC_NAME =	\
 			gui/draw_game_rack\
 			parser/parser\
 			parser/play\
+			parser/ft_matrixnew\
 			ai/ai_dv
 EXT = .c
 

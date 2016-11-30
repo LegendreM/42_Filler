@@ -54,6 +54,7 @@ t_roi	*draw_game_rack(
 			const int rack_height
 		);
 
+char	**ft_matrixnew(const size_t y, const size_t x);
 t_params	*parser(void);
 int			ai_dv(t_params *params, int to_play[]);
 void		play(int x, int y); //where do u want play the next piece

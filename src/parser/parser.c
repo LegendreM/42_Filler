@@ -7,31 +7,6 @@
 #include "get_next_line.h"
 #include "filler.h"
 
-char	**ft_matrixnew(const size_t y, const size_t x)
-{
-	char		**map;
-	size_t		i;
-	size_t		size;
-
-	size = y * (x + 1);
-	if (!(map = (char**)malloc(sizeof(char*) * y + 1)))
-		return (NULL);
-	map[y] = NULL;
-	if (!(map[0] = (char*)malloc(sizeof(char) * size)))
-		return (NULL);
-	ft_bzero(map[0], size);
-
-	i = 1;
-	while (i < y)
-	{
-		// map[i] = &(map[i - 1][height + 1]);
-		map[i] = map[i - 1] + x + 1;
-		i++;
-	}
-	return (map);
-}
-
-
 t_params	*ft_init_board(char *start, t_params *params) //work
 {
 	int i;
@@ -132,13 +107,13 @@ t_params	*ft_check_input(char *str, t_params *params) //work
 	return (params);
 }
 
-void		print_matrix(char **map)
-{
-	while (*map)
-	{
-		ft_putendl_fd(*map++, 2);
-	}
-}
+// void		print_matrix(char **map)
+// {
+// 	while (*map)
+// 	{
+// 		ft_putendl_fd(*map++, 2);
+// 	}
+// }
 
 t_params	*parser(void)
 {
@@ -155,8 +130,8 @@ t_params	*parser(void)
 		params = ft_check_input(line, params);
 	}
 	// It returns a filled matrix, now need to check if it works multiple times
-	print_matrix(params->game_board);
-	print_matrix(params->game_piece);
+	// print_matrix(params->game_board);
+	// print_matrix(params->game_piece);
 	return params;
 }
 

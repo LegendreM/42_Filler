@@ -15,9 +15,23 @@
 /*
 	piece valid position in game board	
 */
-// valid_position(t_params *params)
+// void	valid_position(t_params *params)
 // {
+// 	int i;
+// 	int j;
+// 	int	piece_x;
+// 	int	piece_y;
+// 	char** my_piece;
 
+// 	i = 0;
+// 	j = 0;
+// 	my_piece = ft_matrixnew(params->piece_size.y, params->piece_size.x);
+
+// 	// while (params->game_board[i])
+// 	// {
+// 	// 	ft_putendl_fd(params->game_board[i], 2);
+// 	// 	++i;
+// 	// }
 // }
 
 /*
@@ -55,8 +69,8 @@ int		go_conced()
 
 int		ai_dv(t_params *params, int to_play[])
 {
-	// valid_position()
 	(void)params;
+	// valid_position(params);
 	if((go_close(to_play)))
 		;
 	else if((go_edge(to_play)))
