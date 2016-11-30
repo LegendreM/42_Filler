@@ -132,13 +132,13 @@ t_params	*ft_check_input(char *str, t_params *params) //work
 	return (params);
 }
 
-void		print_matrix(char **map)
-{
-	while (*map)
-	{
-		ft_putendl_fd(*map++, 2);
-	}
-}
+// void		print_matrix(char **map)
+// {
+// 	while (*map)
+// 	{
+// 		ft_putendl_fd(*map++, 2);
+// 	}
+// }
 
 t_params	*parser(void)
 {
@@ -155,8 +155,8 @@ t_params	*parser(void)
 		params = ft_check_input(line, params);
 	}
 	// It returns a filled matrix, now need to check if it works multiple times
-	print_matrix(params->game_board);
-	print_matrix(params->game_piece);
+	// print_matrix(params->game_board);
+	// print_matrix(params->game_piece);
 	return params;
 }
 
