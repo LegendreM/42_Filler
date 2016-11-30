@@ -132,16 +132,15 @@ t_params	*ft_check_input(char *str, t_params *params) //work
 	return (params);
 }
 
-void	print_matrix(char **map)
+void		print_matrix(char **map)
 {
 	while (*map)
 	{
-//		ft_putstr_fd("Iter : ", 2);
 		ft_putendl_fd(*map++, 2);
 	}
 }
 
-void	ft_read()
+t_params	*parser(void)
 {
 	char		*line;
 	char		*map;
@@ -150,7 +149,7 @@ void	ft_read()
 
 	params = NULL;
 	if (!(map = ft_strnew(BUFFSIZE)))
-		return ;
+		return NULL;
 	while ((ret = get_next_line(FD, &line)) > 0)
 	{
 		params = ft_check_input(line, params);
@@ -158,11 +157,11 @@ void	ft_read()
 	// It returns a filled matrix, now need to check if it works multiple times
 	print_matrix(params->game_board);
 	print_matrix(params->game_piece);
-	return ;
+	return params;
 }
 
-int	parser(void)
-{
-	ft_read();
-	return (0);
-}
+// int	parser(void)
+// {
+// 	ft_read();
+// 	return (0);
+// }
