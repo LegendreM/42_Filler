@@ -73,5 +73,5 @@ void	draw_disk_in_roi(t_mlx_image_8u *dst,
 	coord.x = roi.x + roi.width / 2;
 	coord.y = roi.y + roi.height / 2;
 	radius = (roi.width < roi.height) ? roi.width / 2 : roi.height / 2;
-	draw_disk(dst, coord, radius, pixel);
+	draw_disk(dst, coord, radius - 1, pixel);
 }

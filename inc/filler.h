@@ -47,7 +47,7 @@ typedef struct	s_env
 int		start_gui(void);
 int		loop_hook(t_env *env);
 int		expose(t_env *env);
-void	draw_game_rack(
+t_roi	*draw_game_rack(
 			t_mlx_image_8u *dst,
 			const t_pixel_8u pixel,
 			const int rack_width,

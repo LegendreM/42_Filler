@@ -54,5 +54,5 @@ void	draw_circle_in_roi(t_mlx_image_8u *dst,
 	coord.x = roi.x + roi.width / 2;
 	coord.y = roi.y + roi.height / 2;
 	radius = (roi.width < roi.height) ? roi.width / 2 : roi.height / 2;
-	draw_circle(dst, coord, radius, pixel);
+	draw_circle(dst, coord, radius - 1, pixel);
 }
