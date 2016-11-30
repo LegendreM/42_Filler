@@ -6,12 +6,11 @@
 /*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:52:11 by mlegendr          #+#    #+#             */
-/*   Updated: 2014/12/08 16:59:52 by mlegendr         ###   ########.fr       */
+/*   Updated: 2016/11/30 09:48:49 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-#include <mlx.h>
 
 int	expose(t_env *env)
 {

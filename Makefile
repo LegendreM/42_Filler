@@ -16,7 +16,8 @@ SRC_NAME =	\
 			main\
 			gnl/get_next_line\
 			loop_hook\
-			expose
+			expose\
+			draw_game_rack
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a
@@ -58,7 +59,7 @@ $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
 
-clean:
+clean: lclean
 	@rm -rf $(OBJ)
 	@echo "\033[91;1mFiller objects removed\033[0m";
 

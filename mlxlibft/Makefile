@@ -26,7 +26,9 @@ SRC_NAME =	\
 			draw_square.c\
 			create_roi.c\
 			red_cross.c\
-			clear_image_8u.c
+			clear_image_8u.c\
+			draw_rack.c\
+			draw_circle.c
 
 SRC_DIR =	./src/
 OBJ_DIR =	./obj/

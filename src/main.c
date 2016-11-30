@@ -6,14 +6,11 @@
 /*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:41:22 by mlegendr          #+#    #+#             */
-/*   Updated: 2016/06/02 15:41:24 by mlegendr         ###   ########.fr       */
+/*   Updated: 2016/11/30 09:48:56 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-#include "mlxlibft.h"
-#include <stdlib.h>
-#include <mlx.h>
 
 static int	key_press(int keycode, t_env *env)
 {
@@ -36,7 +33,7 @@ int			main(void)
 	t_mlx_env		mlx;
 	t_env			env;
 
-	mlx.win_width = 800;
+	mlx.win_width = 1200;
 	mlx.win_height = 600;
 	if (!(mlx.ptr = mlx_init()))
 		return (1);
