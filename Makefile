@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/11/28 16:59:38 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/11/30 10:02:59 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
 
-clean: lclean
+clean:
 	@rm -rf $(OBJ)
 	@echo "\033[91;1mFiller objects removed\033[0m";
 
