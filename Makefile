@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/11/30 10:02:59 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/11/30 11:19:17 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ NAME = filler
 SRC_NAME =	\
 			main\
 			gnl/get_next_line\
-			loop_hook\
-			expose\
-			draw_game_rack
+			gui/start_gui\
+			gui/loop_hook\
+			gui/expose\
+			gui/draw_game_rack
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a

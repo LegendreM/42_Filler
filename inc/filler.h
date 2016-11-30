@@ -44,6 +44,7 @@ typedef struct	s_env
 	t_mlx_image_8u	*win_img;
 }				t_env;
 
+int		start_gui(void);
 int		loop_hook(t_env *env);
 int		expose(t_env *env);
 void	draw_game_rack(
