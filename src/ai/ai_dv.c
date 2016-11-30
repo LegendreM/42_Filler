@@ -67,6 +67,7 @@ int		go_conced()
 
 int		ai_dv(t_params *params, int to_play[])
 {
+	(void)params;
 	// valid_position(params);
 	if((go_close(to_play)))
 		;

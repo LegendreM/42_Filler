@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdlib.h>
 
 char	**ft_matrixnew(const size_t y, const size_t x)
 {
