@@ -10,7 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = filler
+NAME_DIR = ./resources/players/
+NAME_NAME = titi.filler
+NAME = $(addprefix $(NAME_DIR), $(NAME_NAME))
 
 SRC_NAME =	\
 			main\
@@ -18,7 +20,9 @@ SRC_NAME =	\
 			gui/start_gui\
 			gui/loop_hook\
 			gui/expose\
-			gui/draw_game_rack
+			gui/draw_game_rack\
+			parser/parser\
+			parser/play
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a

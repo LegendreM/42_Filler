@@ -2,12 +2,10 @@
 #define FD 0
 #define PLAYER_NAME "[players/tata.filler]"
 
-#include <sys/types.h>//read
-#include <sys/uio.h>//read
 #include <unistd.h>//read
 #include "libft.h"
 #include "get_next_line.h"
-#include "Filler.h"
+#include "filler.h"
 
 char	**ft_matrixnew(const size_t y, const size_t x)
 {
@@ -95,21 +93,6 @@ void	ft_get_piece(char *line, t_params *params)
 	}
 }
 
-void	ft_play(int x, int y) //work
-{
-	char* x_str;
-	char* y_str;
-
-	if((x_str = ft_itoa(x)) && (y_str = ft_itoa(y)))
-	{
-		write(1, x_str, ft_strlen(x_str));
-		write(1, " ", 1);
-		write(1, y_str, ft_strlen(y_str));
-		write(1, "\n", 1);
-	}
-	return ;
-}
-
 void		ft_fill_matrix(const char *line, t_params *params)
 {
 	ft_strncpy(
@@ -120,7 +103,7 @@ void		ft_fill_matrix(const char *line, t_params *params)
 	params->count_line++;
 }
 
-t_params	*ft_check_input(char *str, t_params *params) //work but useless
+t_params	*ft_check_input(char *str, t_params *params) //work
 {
 	int i;
 	char* start;
@@ -143,7 +126,7 @@ t_params	*ft_check_input(char *str, t_params *params) //work but useless
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
 			ft_get_piece(start, params); // need to work on that
-			ft_play(0, 0);
+				play(0, 0);
 		}
 	}
 	return (params);
@@ -178,7 +161,7 @@ void	ft_read()
 	return ;
 }
 
-int	main(void)
+int	parser(void)
 {
 	ft_read();
 	return (0);

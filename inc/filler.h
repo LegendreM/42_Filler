@@ -54,4 +54,6 @@ void	draw_game_rack(
 			const int rack_height
 		);
 
+int		parser(void);
+void	play(int x, int y); //where do u want play the next piece
 #endif

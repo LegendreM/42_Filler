@@ -19,6 +19,8 @@ int			loop_hook(t_env *env)
 					 20, 20);
 	draw_circle_in_roi(env->win_img, (t_roi){.x = 10, .y = 20, .width = 100, .height = 200}, create_pixel_8u(0xAf, 0x00, 0x5f, 0x00));
 	/* Parser */
+	parser();
 	/* AI */
+	play(8, 2);
 	return (0);
 }
