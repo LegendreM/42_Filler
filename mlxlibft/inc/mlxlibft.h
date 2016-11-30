@@ -30,6 +30,12 @@ typedef struct	s_mlx_env
 	int			win_height;
 }				t_mlx_env;
 
+typedef struct	s_coord
+{
+	int			x;
+	int			y;
+}				t_coord;
+
 typedef	struct	s_mlx_image_8u
 {
 	void		*ptr;
@@ -54,11 +60,7 @@ typedef	struct	s_pixel_8u
 	t_sample_8u	alpha;
 }				t_pixel_8u;
 
-typedef struct	s_coord
-{
-	int			x;
-	int			y;
-}				t_coord;
+
 
 t_mlx_image_8u	*new_mlx_image_8u(void *mlx_ptr, int width, int height);
 t_mlx_image_8u	*new_mlx_xpm_image_8u(void *mlx_ptr, char *filename);
@@ -86,11 +88,22 @@ void			draw_rack(
 				const t_coord rack_size);
 void			draw_circle(
 				t_mlx_image_8u *dst,
-				const t_coord coord,
+				const t_coord center,
 				const int radius,
 				const t_pixel_8u pixel);
 void			draw_circle_in_roi(
 				t_mlx_image_8u *dst,
 				const t_roi roi,
 				const t_pixel_8u pixel);
+void			draw_disk(
+				t_mlx_image_8u *dst,
+				const t_coord center,
+				const int radius,
+				const t_pixel_8u pixel);
+void			draw_disk_in_roi(
+				t_mlx_image_8u *dst,
+				const t_roi roi,
+				const t_pixel_8u pixel);
+t_color_8u		pixel_to_color_8u(const t_pixel_8u pixel);
+t_pixel_8u		color_to_pixel_8u(const t_color_8u color);
 #endif

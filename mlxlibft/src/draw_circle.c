@@ -17,10 +17,13 @@ void	draw_circle(t_mlx_image_8u *dst,
 				const int radius,
 				const t_pixel_8u pixel)
 {
-	int x = radius;
-	int y = 0;
-	int err = 0;
+	int x;
+	int y;
+	int err;
 
+	x = radius;
+	y = 0;
+	err = 0;
 	while (x >= y)
 	{
 		pixel_8u(dst, coord.x + x, coord.y + y, pixel);
@@ -45,8 +48,8 @@ void	draw_circle_in_roi(t_mlx_image_8u *dst,
 			const t_roi roi,
 			const t_pixel_8u pixel)
 {
-	t_coord coord;
-	int radius;
+	t_coord	coord;
+	int		radius;
 
 	coord.x = roi.x + roi.width / 2;
 	coord.y = roi.y + roi.height / 2;

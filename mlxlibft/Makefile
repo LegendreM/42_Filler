@@ -28,7 +28,9 @@ SRC_NAME =	\
 			red_cross.c\
 			clear_image_8u.c\
 			draw_rack.c\
-			draw_circle.c
+			draw_circle.c\
+			draw_disk.c\
+			convert_pixel_color_8u.c
 
 SRC_DIR =	./src/
 OBJ_DIR =	./obj/
