@@ -22,7 +22,8 @@ SRC_NAME =	\
 			gui/expose\
 			gui/draw_game_rack\
 			parser/parser\
-			parser/play
+			parser/play\
+			ai/ai_dv
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a

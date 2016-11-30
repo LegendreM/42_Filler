@@ -15,8 +15,12 @@
 int			loop_hook(t_env *env)
 {
 	t_params	*params;
+	int			to_play[2];
 
+	to_play[0] = 2;
+	to_play[1] = 8;
 	params = NULL;
+	// to_play = (int*)malloc(sizeof(int) * 2);
 	clear_image_8u(env->win_img, create_pixel_8u(0x2f, 0x2f, 0x2f, 0x00));
 	draw_game_rack(env->win_img, create_pixel_8u(0x9f, 0x9f, 0x9f, 0x00),
 					 20, 20);
@@ -25,6 +29,7 @@ int			loop_hook(t_env *env)
 	if (!(params = parser()))
 		return (0);
 	/* AI */
-	play(8, 2);
+	if (ai_dv(params, to_play))
+		play(to_play[0], to_play[1]);
 	return (0);
 }
