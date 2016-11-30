@@ -19,17 +19,19 @@
 // {
 // 	int i;
 // 	int j;
+// 	int	piece_x;
+// 	int	piece_y;
 // 	char** my_piece;
 
 // 	i = 0;
 // 	j = 0;
+// 	my_piece = ft_matrixnew(params->piece_size.y, params->piece_size.x);
 
-// 	while(params->game_board[i])
-// 	while (params->game_board[i])
-// 	{
-// 		ft_putendl_fd(params->game_board[i], 2);
-// 		++i;
-// 	}
+// 	// while (params->game_board[i])
+// 	// {
+// 	// 	ft_putendl_fd(params->game_board[i], 2);
+// 	// 	++i;
+// 	// }
 // }
 
 /*
