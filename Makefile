@@ -26,7 +26,7 @@ SRC_NAME =	\
 			parser/parser\
 			parser/play\
 			parser/ft_matrixnew\
-			ai/ai_dv\
+			ai/dv/ai_dv\
 			gui/draw_game_board\
 			parser/ft_matrixdel
 
