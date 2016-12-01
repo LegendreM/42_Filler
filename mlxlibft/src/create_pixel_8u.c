@@ -12,7 +12,7 @@
 
 #include "mlxlibft.h"
 
-t_pixel_8u	create_pixel_8u(t_sample_8u red, t_sample_8u green,
+inline	t_pixel_8u	create_pixel_8u(t_sample_8u red, t_sample_8u green,
 							t_sample_8u blue, t_sample_8u alpha)
 {
 	return (

@@ -12,12 +12,18 @@
 
 #ifndef MLXLIBFT_H
 # define MLXLIBFT_H
-# define KEYPRESSMASK (1L<<0)
-# define KEYRELEASEMASK (1L<<1)
-# define REDCROSSMASK (1L<<17)
-# define KEYPRESS 2
-# define KEYRELEASE 3
-# define REDCROSS 17
+# define KEYPRESSMASK	(1L<<0)
+# define KEYRELEASEMASK	(1L<<1)
+# define REDCROSSMASK	(1L<<17)
+# define KEYPRESS		2
+# define KEYRELEASE		3
+# define REDCROSS		17
+# define RED_PX			create_pixel_8u(0xff, 0x00, 0x00, 0x00)
+# define GREEN_PX		create_pixel_8u(0x00, 0xff, 0x00, 0x00)
+# define BLUE_PX		create_pixel_8u(0x00, 0x00, 0xff, 0x00)
+# define LIGHT_RED_PX	create_pixel_8u(0xff, 0x50, 0x50, 0x00)
+# define LIGHT_GREEN_PX	create_pixel_8u(0x50, 0xff, 0x50, 0x00)
+# define LIGHT_BLUE_PX	create_pixel_8u(0x50, 0x50, 0xff, 0x00)
 
 typedef unsigned char	t_sample_8u;
 typedef unsigned int	t_color_8u;

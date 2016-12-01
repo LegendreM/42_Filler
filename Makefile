@@ -24,7 +24,8 @@ SRC_NAME =	\
 			parser/parser\
 			parser/play\
 			parser/ft_matrixnew\
-			ai/ai_dv
+			ai/ai_dv\
+			gui/draw_game_board
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a

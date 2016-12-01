@@ -15,7 +15,7 @@ static	t_roi	*save_cases(const t_coord	rack_size,
 	i = 0;
 	while (i < rack_size.x * rack_size.y)
 	{
-		if (coord.x >= roi.width + roi.x)
+		if (coord.x >= rack_size.x * case_size.x + roi.x)
 		{
 			coord.y += case_size.y;
 			coord.x = roi.x;
