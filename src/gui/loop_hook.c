@@ -6,7 +6,7 @@
 /*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 10:52:11 by mlegendr          #+#    #+#             */
-/*   Updated: 2014/12/08 16:59:52 by mlegendr         ###   ########.fr       */
+/*   Updated: 2016/12/01 13:20:54 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@ int			loop_hook(t_env *env)
 		draw_disk_in_roi(env->win_img, rack[i], create_pixel_8u(0x5f, 0x00, 0xAf, 0x00));
 	}
 	// /* Parser */
-	// if (!(params = parser()))
-	// 	return (0);
+	ft_putendl_fd("Pouet 1", 2);
+	if (!(params = parser()))
+	{
+		ft_putendl_fd("In return", 2);
+		return (0);
+	}
 	//  AI 
 	// if (ai_dv(params, to_play))
 	// 	play(to_play[0], to_play[1]);
+//	sleep(1);
+	ft_putendl_fd("Pouet 2", 2);
+	play(2, 8);
+//	play(to_play[0], to_play[1]);
 	return (0);
 }
