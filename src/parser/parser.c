@@ -2,9 +2,6 @@
 #define FD 0
 #define PLAYER_NAME "[players/tata.filler]"
 
-#include <unistd.h>//read
-#include "libft.h"
-#include "get_next_line.h"
 #include "filler.h"
 
 t_params	*ft_init_board(char *start, t_params *params) //work
@@ -23,6 +20,7 @@ t_params	*ft_init_board(char *start, t_params *params) //work
 	params->board_size.x = ft_atoi(&start[i]);
 	params->game_board = ft_matrixnew(params->board_size.y,
 							params->board_size.x);
+	params->game_piece = NULL;
 	params->player = 0;
 	params->count_line = 0;
 	return (params);
@@ -44,6 +42,8 @@ void	ft_get_piece(char *line, t_params *params)
 {
 	int		i;
 
+	if (params->game_piece != NULL)
+		ft_matrixdel(params->game_piece);
 	i = 0;
 	while(ft_isalpha(line[i]) || line[i] == ' ')
 		++i;
@@ -66,6 +66,7 @@ void	ft_get_piece(char *line, t_params *params)
 		);
 		i++;
 	}
+		ft_putendl_fd("Get piece", 2);
 }
 
 void		ft_fill_matrix(const char *line, t_params *params)
@@ -78,7 +79,7 @@ void		ft_fill_matrix(const char *line, t_params *params)
 	params->count_line++;
 }
 
-t_params	*ft_check_input(char *str, t_params *params) //work
+int			ft_check_input(char *str, t_params **params) //work
 {
 	int i;
 	char* start;
@@ -86,34 +87,35 @@ t_params	*ft_check_input(char *str, t_params *params) //work
 	i = 0;
 	if (str)
 	{
-		if (params == NULL && (start = ft_strstr((const char*)str, "Plateau ")))
+		if (*params == NULL && (start = ft_strstr((const char*)str, "Plateau ")))
 		{
-			params = ft_init_board(start, params); // board size
+			*params = ft_init_board(start, *params); // board size
 		}
-		if (params != NULL && params->player == 0 && (start = ft_strstr((const char*)str, PLAYER_NAME)))
+		if (*params != NULL && (*params)->player == 0 && (start = ft_strstr((const char*)str, PLAYER_NAME)))
 		{
-			ft_player_number(start, params);
+			ft_player_number(start, *params);
 		}
 		if (ft_isdigit(str[0]))
 		{
-			ft_fill_matrix((const char *)str, params);
+			ft_fill_matrix((const char *)str, *params);
 		}
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_get_piece(start, params); // need to work on that
-				play(0, 0);
+			ft_get_piece(start, *params); // need to work on that
+			return (0);
+	//			play(0, 0);
 		}
 	}
-	return (params);
+	return (1);
 }
 
-// void		print_matrix(char **map)
-// {
-// 	while (*map)
-// 	{
-// 		ft_putendl_fd(*map++, 2);
-// 	}
-// }
+void		print_matrix(char **map)
+{
+	while (*map)
+	{
+		ft_putendl_fd(*map++, 2);
+	}
+}
 
 t_params	*parser(void)
 {
@@ -125,13 +127,22 @@ t_params	*parser(void)
 	params = NULL;
 	if (!(map = ft_strnew(BUFFSIZE)))
 		return NULL;
-	while ((ret = get_next_line(FD, &line)) > 0)
+	while ((ret = get_next_line(FD, &line)) > 0) //gnl have issues
 	{
-		params = ft_check_input(line, params);
+		if (ft_check_input(line, &params) == 0)
+		{
+
+		ft_putendl_fd("Will break", 2);
+			break;
+		}
 	}
+		ft_putendl_fd("Out loop", 2);
 	// It returns a filled matrix, now need to check if it works multiple times
-	// print_matrix(params->game_board);
-	// print_matrix(params->game_piece);
+	if (params != 0)
+	{
+		print_matrix(params->game_board);
+		print_matrix(params->game_piece);
+	}
 	return params;
 }
 

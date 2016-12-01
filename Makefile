@@ -6,13 +6,15 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/11/30 11:19:17 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/01 10:42:35 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_DIR = ./resources/players/
-NAME_NAME = titi.filler
-NAME = $(addprefix $(NAME_DIR), $(NAME_NAME))
+FILLER_DIR = ./resources/players/
+FILLER_EXT = .filler
+
+DV_NAME = dv
+DV = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(DV_NAME)))
 
 SRC_NAME =	\
 			main\
@@ -25,7 +27,12 @@ SRC_NAME =	\
 			parser/play\
 			parser/ft_matrixnew\
 			ai/ai_dv\
-			gui/draw_game_board
+			gui/draw_game_board\
+			parser/ft_matrixdel
+
+DV_SRC_NAME :=	$(SRC_NAME) \
+				ai/dv/ai_dv
+
 EXT = .c
 
 LIBFT_NAME =	libftprintf.a
@@ -41,19 +48,22 @@ CC = 		clang
 FLAGS = 	-Wall -Werror -Wextra
 MLX_FLAGS =	./mlxlibft/mlxlibft.a -lmlx -framework OpenGL -framework AppKit
 
-SRC =		$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(SRC_NAME)))
-OBJ =		$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+DV_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(DV_SRC_NAME)))
+DV_OBJ =	$(addprefix $(OBJ_DIR), $(DV_SRC:.c=.o))
+
 LIBFT = 	$(addprefix $(LIBFT_DIR),$(LIBFT_NAME))
 MLXLIBFT =	$(addprefix $(MLX_DIR),$(MLXLIBFT_NAME))
 
 NAME_TAR = transfer.tar
 
 
-all: $(NAME)
+all: $(DV)
 
-$(NAME): $(LIBFT) $(MLXLIBFT) $(OBJ)
-	@$(CC) $(MLX_FLAGS) $^ -o $@
-	@echo "\033[92;1mFiller compiled\033[0m";
+dv: $(DV)
+
+$(DV): $(LIBFT) $(MLXLIBFT) $(DV_OBJ)
+	$(CC) $(MLX_FLAGS) $^ -o $@
+	@echo "\033[92;1mDV Filler compiled\033[0m";
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -64,11 +74,11 @@ $(MLXLIBFT):
 	@echo "\033[92;1mMlxLibft compiled\033[0m";
 
 $(OBJ_DIR)%.o: %.c
-	@mkdir -p $(@D)
-	@$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
+	mkdir -p $(@D)
+	$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(DV_OBJ)
 	@echo "\033[91;1mFiller objects removed\033[0m";
 
 lclean:
@@ -76,7 +86,7 @@ lclean:
 	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(DV_NAME)
 	@echo "\033[91;1mFiller binary removed\033[0m";
 
 aclean: fclean
