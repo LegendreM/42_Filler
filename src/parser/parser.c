@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:21:13 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/02 18:45:26 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/02 18:56:24 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_init_board(char *start, t_params *params)
 {
-	ft_putendl_fd("Init board", 2);
 	int i;
 
 	i = 0;
@@ -28,47 +27,32 @@ void	ft_init_board(char *start, t_params *params)
 	params->game_board = ft_matrixnew(params->board_size.y,
 							params->board_size.x);
 	return ;
-//	return (params);
 }
 
 t_params	*ft_init_params(t_params *params)
 {
-		ft_putendl_fd("Init params 1", 2);
 	params = (t_params*)malloc(sizeof(t_params));
 	params->game_board = NULL;
 	params->game_piece = NULL;
 	params->game_piece_min = NULL;
 	params->player[0] = 0;
 	params->count_line = 0;
-		ft_putendl_fd("Init params 2", 2);
 	return (params);
 }
 
 void	ft_player_number(char *start, t_params *params)
 {
-	ft_putendl_fd("Assign player", 2);
 	if (ft_strstr((const char*)start, "$$$ exec p1 :"))
 	{
-		ft_putendl_fd("Enter p1", 2);
 		params->player[0] = 'O';
 		params->player[1] = 'o';
 	}
 	else if (ft_strstr((const char*)start, "$$$ exec p2 :"))
 	{
-		ft_putendl_fd("Enter p2", 2);
 		params->player[0] = 'X';
 		params->player[1] = 'x';
 	}
 	return ;
-/*
-	if (ft_atoi(&start[-4]) == 1)
-		params->player = 'o';
-	else if (ft_atoi(&start[-4]) == 2)
-		params->player = 'x';
-	else
-		return (-1);
-	return (0);
-	*/
 }
 
 void		ft_fill_matrix(const char *line, t_params *params)
@@ -111,7 +95,6 @@ int			ft_check_input(char *str, t_params **params)
 		{
 			ft_get_piece(start, *params);
 			return (0);
-	//			play(0, 0);
 		}
 	}
 	return (1);
@@ -135,24 +118,15 @@ t_params	*parser(t_params *params)
 	char		*map;
 	int			ret;
 
-	ft_putendl_fd("Parser1", 2);
 	if (params != NULL)
 		params->count_line = 0;
 	if (!(map = ft_strnew(BUFFSIZE)))
 		return NULL;
-	ft_putendl_fd("Parser2", 2);
 	while ((ret = get_next_line(FD, &line)) > 0)
 	{
-		ft_putendl_fd("Parser3", 2);
-		ft_putendl_fd(line, 2);
 		if (ft_check_input(line, &params) == 0)
 			break;
 	}
-		ft_putendl_fd("Parser4", 2);
-	ft_putendl_fd(" ", 2);
-	ft_putchar_fd(params->player[0], 2);
-	ft_putchar_fd(params->player[1], 2);
-	ft_putendl_fd(" ", 2);
 	// It returns a filled matrix, now need to check if it works multiple times
 	if (params != 0)
 	{
