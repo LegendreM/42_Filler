@@ -12,7 +12,7 @@
 // }				t_params;
 
 
-int		is_valid_position(t_params *params, t_coord *coord)
+int		is_valid_position(t_params *params, t_coord coord)
 {
 	int x;
 	int y;
@@ -20,15 +20,15 @@ int		is_valid_position(t_params *params, t_coord *coord)
 
 	warning = 0;
 	y = 0;
-	if (coord->x + params->piece_size.x > params->board_size.x || \
-		coord->y + params->piece_size.y > params->board_size.y)
+	if (coord.x + params->piece_size.x > params->board_size.x || \
+		coord.y + params->piece_size.y > params->board_size.y)
 		return (0);
 	while (y < params->piece_size.y)
 	{
 		x = 0;
 		while (x < params->piece_size.x)
 		{
-			if (params->game_board[y + coord->y][x + coord->x] != '.')
+			if (params->game_board[y + coord.y][x + coord.x] != '.')
 				if (params->game_piece[y][x] != '.')
 					++warning;
 			if (warning > 1)
@@ -87,7 +87,7 @@ int		is_valid_position(t_params *params, t_coord *coord)
 // 	return (1);
 // }
 
-int		go_where_u_can(t_params params, t_coord *to_play)
+int		go_where_u_can(t_params *params, t_coord *to_play)
 {
 	int	x;
 	int y;
@@ -119,8 +119,8 @@ int		go_conced()
 
 int		ai_dv(t_params *params, t_coord *to_play)
 {
-	(void)params;
-	valid_position(params);
+	// (void)params;
+	// valid_position(params);
 	// if((go_close(to_play)))
 	// 	;
 	// else if((go_edge(to_play)))

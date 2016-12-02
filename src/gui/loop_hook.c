@@ -15,26 +15,22 @@
 int			loop_hook(t_env *env)
 {
 	t_params	*params;
-	int			to_play[2];
-
-	to_play[0] = 2;
-	to_play[1] = 8;
-	params = NULL;
+	t_coord		to_play;
+(void)env;
 	// to_play = (int*)malloc(sizeof(int) * 2);
 	// /* Parser */
-	ft_putendl_fd("Pouet 1", 2);
+	// ft_putendl_fd("Pouet 1", 2);
 	if (!(params = parser()))
 	{
-		ft_putendl_fd("In return", 2);
+		// ft_putendl_fd("In return", 2);
 		return (0);
 	}
 	//  AI 
-	// if (ai_dv(params, to_play))
-	// 	play(to_play[0], to_play[1]);
-	draw_game_board(env->win_img, params);
+	if (ai_dv(params, &to_play))
+		play(to_play.y, to_play.x);
+	// draw_game_board(env->win_img, params);
 //	sleep(1);
-	ft_putendl_fd("Pouet 2", 2);
-	play(2, 8);
+	// ft_putendl_fd("Pouet 2", 2);
 //	play(to_play[0], to_play[1]);
 	return (0);
 }
