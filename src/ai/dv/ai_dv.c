@@ -117,7 +117,7 @@ int		go_conced()
 	return (0);
 }
 
-int		ai_dv(t_params *params, t_coord *to_play)
+int		ai_launch(t_params *params, t_coord *to_play)
 {
 	// (void)params;
 	// valid_position(params);
