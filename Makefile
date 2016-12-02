@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/01 10:42:35 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/02 17:22:18 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ SRC_NAME =	\
 			parser/parser\
 			parser/play\
 			parser/ft_matrixnew\
+			parser/ft_matrixdel\
+			parser/ft_get_piece\
 			ai/dv/ai_dv\
-			gui/draw_game_board\
-			parser/ft_matrixdel
+			gui/draw_game_board
 
 DV_SRC_NAME :=	$(SRC_NAME) \
 				ai/dv/ai_dv
