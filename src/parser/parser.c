@@ -66,7 +66,7 @@ void	ft_get_piece(char *line, t_params *params)
 		);
 		i++;
 	}
-		ft_putendl_fd("Get piece", 2);
+		// ft_putendl_fd("Get piece", 2);
 }
 
 void		ft_fill_matrix(const char *line, t_params *params)
@@ -109,13 +109,13 @@ int			ft_check_input(char *str, t_params **params) //work
 	return (1);
 }
 
-void		print_matrix(char **map)
-{
-	while (*map)
-	{
-		ft_putendl_fd(*map++, 2);
-	}
-}
+// void		print_matrix(char **map)
+// {
+// 	while (*map)
+// 	{
+// 		// ft_putendl_fd(*map++, 2);
+// 	}
+// }
 
 t_params	*parser(void)
 {
@@ -132,17 +132,17 @@ t_params	*parser(void)
 		if (ft_check_input(line, &params) == 0)
 		{
 
-		ft_putendl_fd("Will break", 2);
+		// ft_putendl_fd("Will break", 2);
 			break;
 		}
 	}
-		ft_putendl_fd("Out loop", 2);
+		// ft_putendl_fd("Out loop", 2);
 	// It returns a filled matrix, now need to check if it works multiple times
-	if (params != 0)
-	{
-		print_matrix(params->game_board);
-		print_matrix(params->game_piece);
-	}
+	// if (params != 0)
+	// {
+	// 	print_matrix(params->game_board);
+	// 	print_matrix(params->game_piece);
+	// }
 	return params;
 }
 
