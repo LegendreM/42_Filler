@@ -12,6 +12,7 @@
 // }				t_params;
 
 
+
 int		is_valid_position(t_params *params, t_coord coord)
 {
 	int x;
@@ -96,9 +97,9 @@ int		go_where_u_can(t_params *params, t_coord *to_play)
 	while (y < params->board_size.y)
 	{
 		x = 0;
-		while(x < params->board_size.x)
+		while (x < params->board_size.x)
 		{	
-			if(is_valid_position(params, (t_coord){.x = x, .y = y}))
+			if (is_valid_position(params, (t_coord){.x = x, .y = y}))
 			{
 				to_play->x = x;
 				to_play->y = y;
