@@ -2,7 +2,7 @@
 # define FILLER_H
 # define BUFFSIZE 8
 # define FD 0
-# define PLAYER_NAME "[players/tata.filler]"
+# define PLAYER_NAME "[players/dv.filler]"
 
 
 # include <mlx.h>
@@ -34,7 +34,7 @@
 
 typedef struct	s_params
 {
-	char		player;
+	char		player[2];
 	int			count_line;
 	char		**game_board;
 	char		**game_piece;
@@ -49,6 +49,7 @@ typedef struct	s_env
 {
 	t_mlx_env		*mlx;
 	t_mlx_image_8u	*win_img;
+	t_params		*params;
 }				t_env;
 
 /*
@@ -64,7 +65,7 @@ t_roi		*draw_game_rack(
 				const int rack_width,
 				const int rack_height
 			);
-void	draw_game_board(t_mlx_image_8u *dst,
+void		draw_game_board(t_mlx_image_8u *dst,
 				const t_params *params);
 
 /*
@@ -73,7 +74,7 @@ void	draw_game_board(t_mlx_image_8u *dst,
 
 char		**ft_matrixnew(const size_t y, const size_t x);
 void		ft_matrixdel(char **map);
-t_params	*parser(void);
+t_params	*parser(t_params *params);
 void		ft_get_piece(char *line, t_params *params);
 void		play(int x, int y); //where do u want play the next piece
 
@@ -81,4 +82,5 @@ void		play(int x, int y); //where do u want play the next piece
  *	AI
  */
 int			ai_launch(t_params *params, t_coord *to_play);
+
 #endif
