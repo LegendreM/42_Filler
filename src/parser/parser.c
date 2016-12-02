@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:21:13 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/02 17:21:41 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:35:08 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	ft_player_number(char *start, t_params *params) //work
 		return (-1);
 	return (0);
 }
-
-
 
 void		ft_fill_matrix(const char *line, t_params *params)
 {
@@ -114,9 +112,7 @@ t_params	*parser(void)
 	while ((ret = get_next_line(FD, &line)) > 0) //gnl have issues
 	{
 		if (ft_check_input(line, &params) == 0)
-		{
 			break;
-		}
 	}
 	// It returns a filled matrix, now need to check if it works multiple times
 	if (params != 0)

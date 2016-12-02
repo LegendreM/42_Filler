@@ -97,17 +97,17 @@ static int			ft_reader(t_tools **tools, char **line)
 	ok = 0;
 	lu = 0;
 	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
-		ft_putendl_fd("Gnl read 1", 2);
+		// ft_putendl_fd("Gnl read 1", 2);
 	while ((lu = read((*tools)->fd, buf, BUFF_SIZE)) > 0)
 	{
-		ft_putendl_fd("Gnl read 2", 2);
+		// ft_putendl_fd("Gnl read 2", 2);
 		buf[lu] = '\0';
 		(*tools)->stock = ft_strjoin_and_free((*tools)->stock, buf);
 		if (ft_check_stock(tools, *&line) && (ok = 1))
 			break ;
 		ok = 2;
 	}
-		ft_putendl_fd("Gnl read 3", 2);
+		// ft_putendl_fd("Gnl read 3", 2);
 	ft_strdel(&buf);
 	if (lu < 0)
 		return (-1);

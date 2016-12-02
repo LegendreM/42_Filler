@@ -65,7 +65,7 @@ char		**ft_matrixnew(const size_t y, const size_t x);
 void		ft_matrixdel(char **map);
 t_params	*parser(void);
 void		ft_get_piece(char *line, t_params *params);
-int			ai_dv(t_params *params, int to_play[]);
+int			ai_dv(t_params *params, t_coord *to_play);
 void		play(int x, int y); //where do u want play the next piece
 void	draw_game_board(t_mlx_image_8u *dst,
 						const t_params *params);
