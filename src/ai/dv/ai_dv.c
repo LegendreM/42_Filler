@@ -12,32 +12,46 @@
 // }				t_params;
 
 
-
-int		is_valid_position(t_params *params, t_coord coord)
+int		is_valid_position2(t_params *params, t_coord coord)
 {
-	int x;
-	int y;
-	int warning;
-
-	warning = 0;
-	y = 0;
 	if (coord.x + params->piece_size.x > params->board_size.x || \
 		coord.y + params->piece_size.y > params->board_size.y)
 		return (0);
-	while (y < params->piece_size.y)
-	{
-		x = 0;
-		while (x < params->piece_size.x)
+	return(1);
+}
+
+int		is_valid_position(t_params *params, t_coord coord)
+{
+	t_coord check;
+	int warning;
+
+	warning = 0;
+	check.y = 0;
+	if(is_valid_position2(params, coord))
+		while (check.y < params->piece_size.y)
 		{
-			if (params->game_board[y + coord.y][x + coord.x] != '.')
-				if (params->game_piece[y][x] != '.')
-					++warning;
-			if (warning > 1)
-				return(0);
-			++x;
+			check.x = 0;
+			while (check.x < params->piece_size.x)
+			{
+				if (params->game_piece[check.y][check.x] != '.')
+					if (params->game_board[check.y + coord.y][check.x + coord.x] != '.')
+					{
+						
+						// if (params->game_board[check.y + coord.y][check.x + coord.x] == params->player ||\
+						// 	params->game_board[check.y + coord.y][check.x + coord.x] == (params->player - 32))
+							++warning;
+						// else
+						// {
+						// 	ft_putendl_fd("toto", 2);
+						// 	return (0);
+						// }
+					}
+				if (warning > 1)
+					return (0);
+				++check.x;
+			}
+			++check.y;
 		}
-		++y;
-	}
 	return(warning);
 }
 
