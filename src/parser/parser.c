@@ -21,6 +21,7 @@ t_params	*ft_init_board(char *start, t_params *params) //work
 	params->game_board = ft_matrixnew(params->board_size.y,
 							params->board_size.x);
 	params->game_piece = NULL;
+	params->game_piece_min = NULL;
 	params->player = 0;
 	params->count_line = 0;
 	return (params);
@@ -38,12 +39,10 @@ int	ft_player_number(char *start, t_params *params) //work
 	return (0);
 }
 
-void	ft_get_piece(char *line, t_params *params)
+void	set_piece_size(char *line, t_params *params)
 {
 	int		i;
 
-	if (params->game_piece != NULL)
-		ft_matrixdel(params->game_piece);
 	i = 0;
 	while(ft_isalpha(line[i]) || line[i] == ' ')
 		++i;
@@ -55,6 +54,95 @@ void	ft_get_piece(char *line, t_params *params)
 							params->piece_size.y,
 							params->piece_size.x
 						);
+	return ;
+}
+
+t_coord	find_piece_min_origin(char **piece, const t_coord size)
+{
+	t_coord	orig;
+	int		x;
+	int		y;
+
+	orig.x = 1;
+	orig.y = 1;
+	y = 0;
+	while (y < size.y)
+	{
+		x = 0;
+		while (x < size.x)
+		{
+			if (piece[y][x] == '*')
+			{
+				if (- x > orig.x || orig.x == 1)
+					orig.x = - x;
+				if (- y > orig.y || orig.y == 1)
+					orig.y = - y;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (orig);
+}
+
+t_coord	find_piece_min_size(char **piece, const t_coord size,
+			const t_coord orig)
+{
+	int		x;
+	int		y;
+	t_coord	size_min;
+
+	size_min.x = 0;
+	size_min.y = 0;
+	y = - orig.y;
+	while (y < size.y)
+	{
+		x = - orig.x;
+		while (x < size.x)
+		{
+			if (piece[y][x] == '*')
+			{
+				if (y + 1 + orig.y > size_min.y)
+					size_min.y = y + 1 + orig.y;
+				if (x + 1 + orig.x > size_min.x)
+					size_min.x = x + 1 + orig.x;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (size_min);
+}
+
+void	ft_get_piece_min(char **piece, const t_coord size,
+				t_params *params)
+{
+	int		y;
+
+	y = 0;
+	if (params->game_piece_min != NULL)
+		free(params->game_piece_min);
+	params->piece_orig = find_piece_min_origin(piece, size);
+	params->piece_size_min = find_piece_min_size(piece, size,
+								(const t_coord)params->piece_orig);
+	params->game_piece_min
+		= (char **)malloc(sizeof(params->piece_size_min.y));
+	while (y < params->piece_size_min.y)
+	{
+		params->game_piece_min[y] = piece[y - params->piece_orig.y]
+										- params->piece_orig.x;
+		y++;
+	}
+	return ;
+}
+
+void	ft_get_piece(char *line, t_params *params)
+{
+	int		i;
+
+	if (params->game_piece != NULL)
+		ft_matrixdel(params->game_piece);
+	set_piece_size(line, params);
 	i = 0;
 	while (i < params->piece_size.y)
 	{
@@ -66,7 +154,12 @@ void	ft_get_piece(char *line, t_params *params)
 		);
 		i++;
 	}
-		// ft_putendl_fd("Get piece", 2);
+
+	ft_get_piece_min(params->game_piece,
+			(const t_coord)params->piece_size,
+			params
+		);
+	return ;
 }
 
 void		ft_fill_matrix(const char *line, t_params *params)
@@ -79,7 +172,7 @@ void		ft_fill_matrix(const char *line, t_params *params)
 	params->count_line++;
 }
 
-int			ft_check_input(char *str, t_params **params) //work
+int			ft_check_input(char *str, t_params **params)
 {
 	int i;
 	char* start;
@@ -89,7 +182,7 @@ int			ft_check_input(char *str, t_params **params) //work
 	{
 		if (*params == NULL && (start = ft_strstr((const char*)str, "Plateau ")))
 		{
-			*params = ft_init_board(start, *params); // board size
+			*params = ft_init_board(start, *params);
 		}
 		if (*params != NULL && (*params)->player == 0 && (start = ft_strstr((const char*)str, PLAYER_NAME)))
 		{
@@ -101,7 +194,7 @@ int			ft_check_input(char *str, t_params **params) //work
 		}
 		if ((start = ft_strstr((const char*)str, "Piece ")))
 		{
-			ft_get_piece(start, *params); // need to work on that
+			ft_get_piece(start, *params);
 			return (0);
 	//			play(0, 0);
 		}
@@ -109,13 +202,17 @@ int			ft_check_input(char *str, t_params **params) //work
 	return (1);
 }
 
-// void		print_matrix(char **map)
-// {
-// 	while (*map)
-// 	{
-// 		// ft_putendl_fd(*map++, 2);
-// 	}
-// }
+void		print_matrix(char **map, t_coord size)
+{
+	int		y;
+
+	y = 0;
+	while (y < size.y)
+	{
+		write(2, map[y++], size.x);
+		write(2, "\n", 1);
+	}
+}
 
 t_params	*parser(void)
 {
@@ -138,11 +235,12 @@ t_params	*parser(void)
 	}
 		// ft_putendl_fd("Out loop", 2);
 	// It returns a filled matrix, now need to check if it works multiple times
-	// if (params != 0)
-	// {
-	// 	print_matrix(params->game_board);
-	// 	print_matrix(params->game_piece);
-	// }
+	if (params != 0)
+	{
+		print_matrix(params->game_board, params->board_size);
+		print_matrix(params->game_piece, params->piece_size);
+		print_matrix(params->game_piece_min, params->piece_size_min);
+	}
 	return params;
 }
 

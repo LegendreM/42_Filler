@@ -34,9 +34,11 @@ typedef struct	s_params
 	int			count_line;
 	char		**game_board;
 	char		**game_piece;
+	char		**game_piece_min;
 	t_coord		board_size;
 	t_coord		piece_size;
-	t_coord		coord;
+	t_coord		piece_size_min;
+	t_coord		piece_orig;
 }				t_params;
 
 typedef struct	s_env
