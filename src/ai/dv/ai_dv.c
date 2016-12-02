@@ -36,13 +36,11 @@ int		is_valid_position(t_params *params, t_coord coord)
 				if (params->game_piece[check.y][check.x] != '.')
 					if (params->game_board[check.y + coord.y][check.x + coord.x] != '.')
 					{
-						
 						// if (params->game_board[check.y + coord.y][check.x + coord.x] == params->player ||\
 						// 	params->game_board[check.y + coord.y][check.x + coord.x] == (params->player - 32))
-							++warning;
+								++warning;
 						// else
 						// {
-						// 	ft_putendl_fd("toto", 2);
 						// 	return (0);
 						// }
 					}
