@@ -6,7 +6,7 @@
 /*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 15:41:22 by mlegendr          #+#    #+#             */
-/*   Updated: 2016/11/30 11:17:41 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/02 18:29:04 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			start_gui(void)
 	if (!(mlx.win = mlx_new_window(mlx.ptr,
 		mlx.win_width, mlx.win_height, "filler")))
 		return (1);
+	env.params = NULL;
 	env.mlx = &mlx;
 	env.win_img = new_mlx_image_8u(
 					env.mlx->ptr, env.mlx->win_width, env.mlx->win_height);
