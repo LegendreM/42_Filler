@@ -36,13 +36,11 @@ int		is_valid_position(t_params *params, t_coord coord)
 				if (params->game_piece[check.y][check.x] != '.')
 					if (params->game_board[check.y + coord.y][check.x + coord.x] != '.')
 					{
-						// if (params->game_board[check.y + coord.y][check.x + coord.x] == params->player ||\
-						// 	params->game_board[check.y + coord.y][check.x + coord.x] == (params->player - 32))
+						if (params->game_board[check.y + coord.y][check.x + coord.x] == params->player[0] ||\
+							params->game_board[check.y + coord.y][check.x + coord.x] == params->player[1])
 								++warning;
-						// else
-						// {
-						// 	return (0);
-						// }
+						else
+							return (0);
 					}
 				if (warning > 1)
 					return (0);
@@ -105,6 +103,8 @@ int		go_where_u_can(t_params *params, t_coord *to_play)
 	int	x;
 	int y;
 
+	to_play->x = 0;
+	to_play->y = 0;
 	y = 0;
 	while (y < params->board_size.y)
 	{
