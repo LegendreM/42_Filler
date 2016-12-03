@@ -110,7 +110,7 @@ int		go_where_u_can(t_params *params, t_coord *to_play)
 	{
 		x = 0;
 		while (x < params->board_size.x)
-		{	
+		{
 			if (is_valid_position(params, (t_coord){.x = x, .y = y}))
 			{
 				to_play->x = x;
@@ -124,6 +124,34 @@ int		go_where_u_can(t_params *params, t_coord *to_play)
 	return (0);
 }
 
+int		get_possible_positions(t_params *params, t_coord *pos)
+{
+	int	x;
+	int y;
+	int	i;
+
+	y = 0;
+	i = 0;
+	while (y < params->board_size.y)
+	{
+		x = 0;
+		while (x < params->board_size.x)
+		{
+			if (is_valid_position(params, (t_coord){.x = x, .y = y}))
+			{
+				pos[i].x = x;
+				pos[i++].y = y;
+//				to_play->x = x;
+//				to_play->y = y;
+//				return (1);
+			}
+			++x;
+		}
+		++y;
+	}
+	return (i);
+}
+
 int		go_conced()
 {
 	ft_putstr("STUPID GAME!");
@@ -132,6 +160,8 @@ int		go_conced()
 
 int		ai_launch(t_params *params, t_coord *to_play)
 {
+	t_coord		pos[params->board_size.x * params->board_size.y];
+	int			pos_size;
 	// (void)params;
 	// valid_position(params);
 	// if((go_close(to_play)))
@@ -140,6 +170,8 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	// 	;
 	// else
 	// 	return (go_conced());
-	go_where_u_can(params, to_play);
+	pos_size = get_possible_positions(params, pos);
+	*to_play = pos[rand() % pos_size];
+//	go_where_u_can(params, to_play);
 	return(1);
 }
