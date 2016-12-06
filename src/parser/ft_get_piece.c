@@ -92,8 +92,8 @@ static void		ft_get_piece_min(char **piece, const t_coord size,
 	int		y;
 
 	y = 0;
-	if (params->game_piece_min != NULL)
-		free(params->game_piece_min);
+	// if (params->game_piece_min != NULL)
+	// 	free(params->game_piece_min);
 	params->piece_orig = find_piece_min_origin(piece, size);
 	params->piece_size_min = find_piece_min_size(piece, size,
 								(const t_coord)params->piece_orig);
@@ -112,8 +112,8 @@ void			ft_get_piece(char *line, t_params *params)
 {
 	int		i;
 
-	if (params->game_piece != NULL)
-		ft_matrixdel(params->game_piece);
+	// if (params->game_piece != NULL)
+	// 	ft_matrixdel(params->game_piece);
 	set_piece_size(line, params);
 	i = 0;
 	while (i < params->piece_size.y)

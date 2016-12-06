@@ -14,6 +14,17 @@
 
 int		main(void)
 {
-	start_gui();
-	return(0);
+	t_coord		to_play;
+	t_params 	*params;
+
+	params = NULL;
+	while (1)
+	{
+		params = parser(params);
+		if (ai_launch(params, &to_play))
+		{
+			play(to_play.y, to_play.x);
+		}
+	}
+	return (0);
 }

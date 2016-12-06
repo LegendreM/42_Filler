@@ -29,7 +29,7 @@ char				*ft_strjoin_and_free(char *s1, char *s2)
 		{
 			newstr = ft_strcat(newstr, s1);
 			newstr = ft_strcat(newstr, s2);
-			free(s1);
+			// free(s1);
 			return (newstr);
 		}
 	}
@@ -79,7 +79,7 @@ static int			ft_check_stock(t_tools **tools, char **line)
 				len = (int)ft_strlen((*tools)->stock);
 				++i;
 				(*tools)->stock = ft_strsub((*tools)->stock, i, len);
-				free(tmp_stock);
+				// free(tmp_stock);
 				return (1);
 			}
 			++i;
