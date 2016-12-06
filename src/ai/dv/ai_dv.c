@@ -5,18 +5,20 @@
 // 	char		player;
 // 	int			count_line;
 // 	char		**game_board;
-// 	char		**game_piece;
+// 	char		**game_piece_min;
 // 	t_coord		board_size;
-// 	t_coord		piece_size;
+// 	t_coord		piece_size_min;
 // 	t_coord		coord;
 // }				t_params;
 
 
 int		is_valid_position2(t_params *params, t_coord coord)
 {
-	if (coord.x + params->piece_size.x > params->board_size.x || \
-		coord.y + params->piece_size.y > params->board_size.y)
+	if ((coord.x + params->piece_size_min.x) > params->board_size.x || \
+		(coord.y + params->piece_size_min.y) > params->board_size.y)
+	{
 		return (0);
+	}
 	return(1);
 }
 
@@ -28,12 +30,12 @@ int		is_valid_position(t_params *params, t_coord coord)
 	warning = 0;
 	check.y = 0;
 	if(is_valid_position2(params, coord))
-		while (check.y < params->piece_size.y)
+		while (check.y < params->piece_size_min.y)
 		{
 			check.x = 0;
-			while (check.x < params->piece_size.x)
+			while (check.x < params->piece_size_min.x)
 			{
-				if (params->game_piece[check.y][check.x] != '.')
+				if (params->game_piece_min[check.y][check.x] != '.')
 					if (params->game_board[check.y + coord.y][check.x + coord.x] != '.')
 					{
 						if (params->game_board[check.y + coord.y][check.x + coord.x] == params->player[0] ||\
@@ -64,7 +66,7 @@ int		is_valid_position(t_params *params, t_coord coord)
 
 // 	i = 0;
 // 	j = 0;
-// 	my_piece = ft_matrixnew(params->piece_size.y, params->piece_size.x);
+// 	my_piece = ft_matrixnew(params->piece_size_min.y, params->piece_size_min.x);
 
 // 	while (params->game_board[i])
 // 	{
@@ -113,8 +115,8 @@ int		go_where_u_can(t_params *params, t_coord *to_play)
 		{
 			if (is_valid_position(params, (t_coord){.x = x, .y = y}))
 			{
-				to_play->x = x;
-				to_play->y = y;
+				to_play->x = x + params->piece_orig.x;
+				to_play->y = y + params->piece_orig.y;
 				return (1);
 			}
 			++x;
@@ -160,8 +162,8 @@ int		go_conced()
 
 int		ai_launch(t_params *params, t_coord *to_play)
 {
-	t_coord		pos[params->board_size.x * params->board_size.y];
-	int			pos_size;
+	// t_coord		pos[params->board_size.x * params->board_size.y];
+	// int			pos_size;
 	// (void)params;
 	// valid_position(params);
 	// if((go_close(to_play)))
@@ -170,8 +172,8 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	// 	;
 	// else
 	// 	return (go_conced());
-	pos_size = get_possible_positions(params, pos);
-	*to_play = pos[rand() % pos_size];
-//	go_where_u_can(params, to_play);
+	// pos_size = get_possible_positions(params, pos);
+	// *to_play = pos[rand() % pos_size];
+	go_where_u_can(params, to_play);
 	return(1);
 }
