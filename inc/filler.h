@@ -1,7 +1,9 @@
 #ifndef FILLER_H
+
 # define FILLER_H
 # define BUFFSIZE 8
 # define FD 0
+# define SPEED 50000
 # define PLAYER_NAME "[players/dv.filler]"
 
 # include <math.h>

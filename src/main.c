@@ -6,12 +6,12 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 11:19:24 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/07 15:59:21 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/07 16:32:52 by mlegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
+/*
 static t_params	*init_params(t_params *params)
 {
 	if ((params = (t_params *)malloc(sizeof(t_params))) == NULL)
@@ -28,9 +28,10 @@ static t_params	*init_params(t_params *params)
 	params->count_line = 0;
 	return (params);
 }
-
+*/
 int				main(void)
 {
+	/*
 	t_coord		to_play;
 	t_params	*params;
 
@@ -39,11 +40,12 @@ int				main(void)
 	while (1)
 	{
 		params = parser(params);
-//		usleep(100000);
 		if (ai_launch(params, &to_play))
 		{
 			play(params->piece_orig, to_play.y, to_play.x);
 		}
 	}
+	*/
+	start_gui();
 	return (0);
 }
