@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/07 13:56:22 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/07 15:44:54 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ FILLER_EXT = .filler
 DV_NAME = dv
 DV = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(DV_NAME)))
 
+WYKI_NAME = wyki
+WYKI = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(WYKI_NAME)))
+
 SRC_NAME =	\
 			main\
 			gnl/get_next_line\
@@ -23,16 +26,19 @@ SRC_NAME =	\
 			gui/loop_hook\
 			gui/expose\
 			gui/draw_game_rack\
+			gui/draw_game_board\
 			parser/parser\
+			parser/set_piece\
 			parser/play\
 			parser/ft_matrixnew\
 			parser/ft_matrixdel\
-			ai/dv/ai_dv\
-			gui/draw_game_board
-			#parser/ft_get_piece\
+			ai/get_possible_positions
 
-DV_SRC_NAME :=	$(SRC_NAME) \
+DV_SRC_NAME :=	$(SRC_NAME)\
 				ai/dv/ai_dv
+
+WYKI_SRC_NAME :=	$(SRC_NAME)\
+					ai/wyki/ai_wyki
 
 EXT = .c
 
@@ -52,19 +58,28 @@ MLX_FLAGS =	./mlxlibft/mlxlibft.a -lmlx -framework OpenGL -framework AppKit
 DV_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(DV_SRC_NAME)))
 DV_OBJ =	$(addprefix $(OBJ_DIR), $(DV_SRC:.c=.o))
 
+WYKI_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(WYKI_SRC_NAME)))
+WYKI_OBJ =	$(addprefix $(OBJ_DIR), $(WYKI_SRC:.c=.o))
+
 LIBFT = 	$(addprefix $(LIBFT_DIR),$(LIBFT_NAME))
 MLXLIBFT =	$(addprefix $(MLX_DIR),$(MLXLIBFT_NAME))
 
 NAME_TAR = transfer.tar
 
 
-all: $(DV)
+all: $(DV) $(WYKI)
 
 dv: $(DV)
+
+wyki: $(WYKI)
 
 $(DV): $(LIBFT) $(MLXLIBFT) $(DV_OBJ)
 	$(CC) $(MLX_FLAGS) $^ -o $@
 	@echo "\033[92;1mDV Filler compiled\033[0m";
+
+$(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
+	$(CC) $(MLX_FLAGS) $^ -o $@
+	@echo "\033[92;1mWYKI Filler compiled\033[0m";
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
