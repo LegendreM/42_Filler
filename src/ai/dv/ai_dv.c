@@ -224,6 +224,63 @@ int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 	return (1);
 }
 
+t_roi	test_sq(t_roi sq, t_params *params)
+{
+	t_coord coord;
+	const char **gb = (const char**)params->game_board;
+
+	if (sq.y + sq.height > params->board_size.y ||\
+		sq.x + sq.width > params->board_size.x)
+		return (sq);
+	coord.y = 0;
+	while (coord.y < sq.width)
+	{
+		coord.x = 0;
+		while (coord.y < sq.width)
+		{
+			if (gb[coord.y + sq.y][coord.x + sq.x] != '.')
+				return (sq);
+			++coord.x;
+		}
+		++coord.y;
+	}
+	++sq.width;
+	++sq.height;
+	return (test_sq(sq, params));
+}
+
+
+int		bsq(t_coord *to_play, t_params *params)
+{
+	t_roi sq;
+	t_roi max_sq;
+	sq = create_roi(0, 0, 1, 1);
+	max_sq = create_roi(0, 0, 0, 0);
+
+	sq.y = 0;
+	while (sq.y < params->board_size.y)
+	{
+	 	sq.x = 0;
+		while (sq.x < params->board_size.x)
+		{
+			sq = test_sq(sq, params);
+			if (sq.width * sq.height > max_sq.width * max_sq.height)
+				max_sq = sq;
+			sq = max_sq;
+			++sq.x;
+		}
+		++sq.y;
+	}
+	to_play->x = max_sq.x + max_sq.width / 2;
+	to_play->y = max_sq.y + max_sq.height / 2;
+	return (1);
+}
+
+// int		go_space(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
+// {
+// 	return (1);
+// }
+
 
 int		ai_launch(t_params *params, t_coord *to_play)
 {
@@ -233,8 +290,11 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	pos_size = get_possible_positions(params, pos);
 	// *to_play = pos[rand() % pos_size];
 	// valid_position(params);
-	if((go_close(to_play, pos_size, pos, params)))
+	if((bsq(to_play, params)))
 		return(1);
+
+	// if((go_close(to_play, pos_size, pos, params)))
+	// 	return(1);
 	// else if((go_edge(to_play)))
 	// 	;
 	// else
