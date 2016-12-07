@@ -34,7 +34,7 @@
 
 typedef struct	s_params
 {
-	char		player[2];
+	char		player[3];
 	int			count_line;
 	char		**game_board;
 	char		**game_piece;
