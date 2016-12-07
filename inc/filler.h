@@ -4,6 +4,7 @@
 # define FD 0
 # define PLAYER_NAME "[players/dv.filler]"
 
+# include <math.h>
 # include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -75,11 +76,12 @@ char		**ft_matrixnew(const size_t y, const size_t x);
 void		ft_matrixdel(char **map);
 t_params	*parser(t_params *params);
 void		set_piece(char *line, t_params *params);
-void		play(int x, int y);
+void		play(t_coord params, int x, int y);
 
 /*
  *	AI
  */
 int			ai_launch(t_params *params, t_coord *to_play);
+int			get_possible_positions(t_params *params, t_coord *pos);
 
 #endif

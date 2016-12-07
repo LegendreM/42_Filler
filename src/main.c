@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 11:19:24 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/07 13:56:41 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/07 15:59:21 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				main(void)
 //		usleep(100000);
 		if (ai_launch(params, &to_play))
 		{
-			play(to_play.y, to_play.x);
+			play(params->piece_orig, to_play.y, to_play.x);
 		}
 	}
 	return (0);
