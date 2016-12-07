@@ -4,7 +4,6 @@
 # define FD 0
 # define PLAYER_NAME "[players/dv.filler]"
 
-
 # include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -75,8 +74,8 @@ void		draw_game_board(t_mlx_image_8u *dst,
 char		**ft_matrixnew(const size_t y, const size_t x);
 void		ft_matrixdel(char **map);
 t_params	*parser(t_params *params);
-void		ft_get_piece(char *line, t_params *params);
-void		play(int x, int y); //where do u want play the next piece
+void		set_piece(char *line, t_params *params);
+void		play(int x, int y);
 
 /*
  *	AI
