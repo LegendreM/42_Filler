@@ -2,10 +2,10 @@
 
 # define FILLER_H
 
-# define GUI 0
+# define GUI 1
 # define BUFFSIZE 8
 # define FD 0
-# define SPEED 10000
+# define SPEED 50000
 # define PLAYER_NAME "[players/dv.filler]"
 
 # include <math.h>
@@ -37,6 +37,11 @@
 	@brief: struct wich contain coord of game_piece
 */
 
+typedef enum	e_axis
+{
+	axis_x = 0, axis_y
+}				t_axis;
+
 typedef struct	s_params
 {
 	char		player[3];
@@ -49,6 +54,15 @@ typedef struct	s_params
 	t_coord		piece_size_min;
 	t_coord		piece_orig;
 }				t_params;
+
+typedef struct	s_square
+{
+	t_coord	min;
+	t_coord	max;
+	t_coord	size;
+	t_coord	center;
+	int		area;
+}				t_square;
 
 typedef struct	s_env
 {
