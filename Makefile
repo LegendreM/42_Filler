@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/07 15:44:54 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/08 10:55:36 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ dv: $(DV)
 wyki: $(WYKI)
 
 $(DV): $(LIBFT) $(MLXLIBFT) $(DV_OBJ)
-	$(CC) $(MLX_FLAGS) $^ -o $@
+	@$(CC) $(MLX_FLAGS) $^ -o $@
 	@echo "\033[92;1mDV Filler compiled\033[0m";
 
 $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
@@ -90,8 +90,8 @@ $(MLXLIBFT):
 	@echo "\033[92;1mMlxLibft compiled\033[0m";
 
 $(OBJ_DIR)%.o: %.c
-	mkdir -p $(@D)
-	$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
+	@mkdir -p $(@D)
+	@$(CC) $(FLAGS) -o $@ -c $< -I $(INC_DIR)
 
 clean:
 	@rm -rf $(DV_OBJ)
