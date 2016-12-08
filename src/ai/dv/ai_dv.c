@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 15:32:46 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/07 16:01:29 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/08 13:04:18 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_coord		bsq(t_params *params)
 	sq.y = 0;
 	while (sq.y < params->board_size.y)
 	{
-	 	sq.x = 0;
+		sq.x = 0;
 		while (sq.x < params->board_size.x)
 		{
 			sq = test_sq(sq, params);
@@ -179,16 +179,13 @@ int find_top(t_params *params)
 	check.y = 0;
 	while (check.y < params->board_size.y)
 	{
-	 	check.x = 0;
+		check.x = 0;
 		while (check.x < params->board_size.x)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("top: ", 2);
-		ft_putnbr_fd(check.y, 2); 
-
-				return (check.y);				
+				return (check.y);
 			}
 
 			++check.x;
@@ -205,14 +202,12 @@ int find_bot(t_params *params)
 	check.y = params->board_size.y - 1;
 	while (check.y > -1)
 	{
-	 	check.x = 0;
+		check.x = 0;
 		while (check.x < params->board_size.x)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("bot: ", 2);
-		ft_putnbr_fd(check.y, 2); 
 				return (check.y);
 			}
 			++check.x;
@@ -229,14 +224,12 @@ int find_left(t_params *params)
 	check.x = 0;
 	while (check.x < params->board_size.x)
 	{
-	 	check.y = 0;
+		check.y = 0;
 		while (check.y < params->board_size.y)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-						ft_putendl_fd("left: ", 2);
-		ft_putnbr_fd(check.x, 2); 
 				return (check.x);
 			}
 			++check.y;
@@ -253,16 +246,13 @@ int find_right(t_params *params)
 	check.x = params->board_size.x - 1;
 	while (check.x > -1)
 	{
-	 	check.y = 0;
+		check.y = 0;
 		while (check.y < params->board_size.y)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("right: ", 2);
-		ft_putnbr_fd(check.x, 2); 
 				return (check.x);
-				
 			}
 			++check.y;
 		}
@@ -334,9 +324,6 @@ int	easy_win_vs_qhonore(t_params *params, t_coord *pos, int pos_size, t_coord *t
 	{
 		place_piece(params, pos[i]);
 		sq_size = check_square(params);
-		ft_putendl_fd("sq_size: ", 2);
-		ft_putnbr_fd(sq_size, 2); 
-		
 		if (sq_size == (params->board_size.x * params->board_size.y))
 			return (go_close(to_play, pos_size, pos, params));
 		if (max < sq_size)

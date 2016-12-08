@@ -1,6 +1,8 @@
 #ifndef FILLER_H
 
 # define FILLER_H
+
+# define GUI 0
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 10000
@@ -14,6 +16,7 @@
 # include "./libft.h"
 # include "./mlxlibft.h"
 # include "./get_next_line.h"
+
 /*
 @name: t_params
 @brief: struct returned by parser and passed as parameter to AI
@@ -74,11 +77,12 @@ void		draw_game_board(t_mlx_image_8u *dst,
  *	PARSER
  */
 
-char		**ft_matrixnew(const size_t y, const size_t x);
-void		ft_matrixdel(char **map);
+void		start_filler(void);
 t_params	*parser(t_params *params);
 void		set_piece(char *line, t_params *params);
 void		play(t_coord params, int x, int y);
+char		**ft_matrixnew(const size_t y, const size_t x);
+void		ft_matrixdel(char **map);
 
 /*
  *	AI
