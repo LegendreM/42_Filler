@@ -2,10 +2,10 @@
 
 # define FILLER_H
 
-# define GUI 1
+# define GUI 0
 # define BUFFSIZE 8
 # define FD 0
-# define SPEED 500000
+# define SPEED 500
 # define PLAYER_NAME "[players/dv.filler]"
 
 # include <math.h>

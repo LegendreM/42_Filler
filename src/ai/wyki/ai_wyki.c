@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:49:39 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/09 15:00:36 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/09 15:08:40 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int			get_distance(t_coord a, t_coord b)
 	y_dist = y_dist < 0 ? - y_dist : y_dist;
 	dist = x_dist * x_dist + y_dist * y_dist;
 	dist = ft_sqrt(dist);
-	ft_putnbr_fd(dist, 2);
 	return (dist);
 }
 
@@ -169,7 +168,6 @@ int			is_edge_occupied(t_params *params, t_coord pos)
 			if (params->game_board[y++][x] == params->player[0])
 				return (1);
 		}
-	ft_putendl_fd("Edge not occupied", 2);
 	return (0);
 }
 
@@ -321,11 +319,10 @@ int		ai_launch(t_params *params, t_coord *to_play)
 
 	fill_squares(params, &me, &op);
 //	print_square(&me);
-	print_square(&op);
+//	print_square(&op);
 	pos_size = get_possible_positions(params, pos);
 	if (!already_on_edges(params))
 	{
-		ft_putendl_fd("Not already on edges", 2);
 		pos_size = rush_edge(pos, &op, pos_size, get_axis(&me, &op));
 		*to_play = get_distance(pos[0], op.center)
 			> get_distance(pos[1], op.center) ? pos[1] : pos[0];
