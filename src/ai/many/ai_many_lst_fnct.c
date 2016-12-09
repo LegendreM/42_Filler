@@ -33,7 +33,6 @@ void			ft_lstswap(t_list *current, t_list *next)
 	current->content ^= next->content;
 	next->content ^= current->content;
 	current->content ^= next->content;
-
 }
 
 void			swap_by_weight(t_list *lst)
@@ -43,10 +42,8 @@ void			swap_by_weight(t_list *lst)
 
 	if (c->p_weight > nc->p_weight)
 		return ;
-	else if (c->p_weight < nc->p_weight)
-	{
-
-	}
+	else if (c->p_weight < nc->p_weight || c->s_weight < nc->s_weight)
+		return (ft_lstswap(lst, lst->next));
 }
 
 void			list_sort_by_weight(t_list *lst)
@@ -57,7 +54,5 @@ void			list_sort_by_weight(t_list *lst)
 		return ;
 	len = ft_lstlen(lst);
 	while (--len > -1)
-		ft_lstiter(lst)
-
+		ft_lstiter(lst, swap_by_weight);
 }
-
