@@ -33,7 +33,9 @@ SRC_NAME =	\
 			parser/play\
 			parser/ft_matrixnew\
 			parser/ft_matrixdel\
-			ai/get_possible_positions
+			ai/get_possible_positions\
+			ai/piece_placing\
+			ai/mid_points
 
 DV_SRC_NAME :=	$(SRC_NAME)\
 				ai/dv/ai_dv
