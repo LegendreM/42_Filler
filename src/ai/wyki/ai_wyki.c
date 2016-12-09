@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:49:39 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/09 15:08:40 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/09 15:57:09 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ t_coord		go_closer(t_coord *pos, int pos_size, t_square *op)
 	ret = pos_size > 0 ? pos[0] : (t_coord){0, 0};
 	while (x < pos_size)
 	{
-		if (get_distance(pos[x], op->center) >= get_distance(ret, op->center)
+		if (get_distance(pos[x], op->center) <= get_distance(ret, op->center)
 			&& !in_square(pos[x], op))
 			ret = pos[x];
 		++x;
@@ -324,12 +324,14 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	if (!already_on_edges(params))
 	{
 		pos_size = rush_edge(pos, &op, pos_size, get_axis(&me, &op));
-		*to_play = get_distance(pos[0], op.center)
-			> get_distance(pos[1], op.center) ? pos[1] : pos[0];
+//		*to_play = get_distance(pos[0], op.center)
+//			> get_distance(pos[1], op.center) ? pos[1] : pos[0];
+		*to_play = in_square(pos[0], &op) ? pos[1] : pos[0];
 //		*to_play = is_edge_occupied(params, pos[0]) ? pos[1] : pos[0];
 	}
 	else
 	{
+		ft_putendl_fd("In else statement", 2);
 		*to_play = go_closer(pos, pos_size, &op);
 //		*to_play = pos_size != 0 ? pos[rand() % pos_size] : (t_coord){0, 0};
 	}
