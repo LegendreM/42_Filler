@@ -13,7 +13,7 @@ static int	block_opp(t_params *params, t_coord coord, t_coord check,
 	return (1);
 }
 
-int		check_opp(t_params *params, char opp_game_board[params->board_size.y][params->board_size.x], t_coord coord)
+int			check_opp(t_params *params, char opp_game_board[params->board_size.y][params->board_size.x], t_coord coord)
 {
 	t_coord check;
 	int		blocked;
@@ -33,7 +33,7 @@ int		check_opp(t_params *params, char opp_game_board[params->board_size.y][param
 	return (blocked);	
 }
 
-void	opp_game_board_init(t_params *params, char opp_game_board[params->board_size.y][params->board_size.x])
+void		opp_game_board_init(t_params *params, char opp_game_board[params->board_size.y][params->board_size.x])
 {
 	t_coord check;
 
@@ -51,7 +51,7 @@ void	opp_game_board_init(t_params *params, char opp_game_board[params->board_siz
 }
 
 
-int		go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me, t_coord *to_play)
+int			go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me, t_coord *to_play)
 {
 	char	opp_game_board[params->board_size.y][params->board_size.x];
 	t_coord	check;
@@ -85,7 +85,7 @@ int		go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me,
 	return (ret);
 }
 
-int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
+int			go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 {
 	t_coord opp_c;
 	int		i;
@@ -111,7 +111,7 @@ int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 	return (1);
 }
 
-int		ai_launch(t_params *params, t_coord *to_play)
+int			ai_launch(t_params *params, t_coord *to_play)
 {
 	t_coord		me[params->board_size.x * params->board_size.y];
 	t_coord		opp[params->board_size.x * params->board_size.y];

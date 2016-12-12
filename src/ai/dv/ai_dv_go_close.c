@@ -33,9 +33,7 @@ int		ai_launch(t_params *params, t_coord *to_play)
 
 	to_play->x = 0;
 	to_play->y = 0;
-
 	pos_size = get_possible_positions(params, pos);
-
 	if ((go_close(to_play, pos_size, pos, params)))
 		return (1);
 	return (1);

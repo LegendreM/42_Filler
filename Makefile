@@ -44,7 +44,7 @@ SRC_NAME =	\
 			ai/dv/t_coord_init
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv4
+				ai/dv/ai_dv_go_close
 
 MX_SRC_NAME :=	$(SRC_NAME)\
 				ai/many/ai_many\
