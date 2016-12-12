@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/08 13:00:11 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/07 15:44:54 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_NAME =	\
 			ai/get_possible_positions\
 			ai/piece_placing\
 			ai/mid_points
+			ai/get_dist
 
 DV_SRC_NAME :=	$(SRC_NAME)\
 				ai/dv/ai_dv
