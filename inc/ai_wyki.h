@@ -2,6 +2,7 @@
 
 # define WYKI_AI_H
 
+# include "filler.h"
 # include "mlxlibft.h"
 
 typedef enum	e_axis
@@ -17,5 +18,15 @@ typedef struct	s_square
 	t_coord	center;
 	int		area;
 }				t_square;
+
+void		fill_squares(t_params *params, t_square *me, t_square *op);
+int			in_square(t_coord pos, t_square *sq);
+
+t_coord		go_closer(t_params *params, t_coord *pos, int pos_size,
+				t_square *op);
+
+int			check_edge(t_params *params, char c, t_coord orig, t_coord end);
+
+int			is_edge_occupied(t_params *params, t_coord pos);
 
 #endif
