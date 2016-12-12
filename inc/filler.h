@@ -1,19 +1,21 @@
 #ifndef FILLER_H
 
 # define FILLER_H
+
+# define GUI 1
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 10000
-# define PLAYER_NAME "[players/dv.filler]"
 
 # include <math.h>
 # include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# include "./libft.h"
-# include "./mlxlibft.h"
-# include "./get_next_line.h"
+# include "libft.h"
+# include "mlxlibft.h"
+# include "get_next_line.h"
+
 /*
 @name: t_params
 @brief: struct returned by parser and passed as parameter to AI
@@ -74,16 +76,19 @@ void		draw_game_board(t_mlx_image_8u *dst,
  *	PARSER
  */
 
-char		**ft_matrixnew(const size_t y, const size_t x);
-void		ft_matrixdel(char **map);
+void		start_filler(void);
 t_params	*parser(t_params *params);
 void		set_piece(char *line, t_params *params);
 void		play(t_coord params, int x, int y);
+char		**ft_matrixnew(const size_t y, const size_t x);
+void		ft_matrixdel(char **map);
 
 /*
  *	AI
  */
 int			ai_launch(t_params *params, t_coord *to_play);
 int			get_possible_positions(t_params *params, t_coord *pos);
-
+t_coord		mid_points(t_params *params, char player[3]);
+int			place_piece(t_params *params, t_coord coord);
+int			reset_piece(t_params *params, t_coord coord);
 #endif

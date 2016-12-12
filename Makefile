@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/08 10:55:36 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/08 13:00:11 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,15 @@ SRC_NAME =	\
 			gui/expose\
 			gui/draw_game_rack\
 			gui/draw_game_board\
+			parser/start_filler\
 			parser/parser\
 			parser/set_piece\
 			parser/play\
 			parser/ft_matrixnew\
 			parser/ft_matrixdel\
-			ai/get_possible_positions
+			ai/get_possible_positions\
+			ai/piece_placing\
+			ai/mid_points
 
 DV_SRC_NAME :=	$(SRC_NAME)\
 				ai/dv/ai_dv
@@ -78,7 +81,7 @@ $(DV): $(LIBFT) $(MLXLIBFT) $(DV_OBJ)
 	@echo "\033[92;1mDV Filler compiled\033[0m";
 
 $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
-	$(CC) $(MLX_FLAGS) $^ -o $@
+	@$(CC) $(MLX_FLAGS) $^ -o $@
 	@echo "\033[92;1mWYKI Filler compiled\033[0m";
 
 $(LIBFT):

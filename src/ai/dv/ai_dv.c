@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/07 15:32:46 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/07 16:01:29 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/08 13:04:18 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,6 @@ int		go_conced()
 {
 	ft_putstr("STUPID GAME!");
 	return (0);
-}
-
-t_coord		mid_points(t_params *params)
-{
-	t_coord opp_c;
-	int opp_size;
-	t_coord check;
-
-	opp_c.x = 0;
-	opp_c.y = 0;
-	opp_size = 0;
-	check.y = 0;
-	while (check.y < params->board_size.y)
-	{
-		check.x = 0;
-		while (check.x < params->board_size.x)
-		{
-			if (params->game_board[check.y][check.x] != '.')
-			{
-				if (params->game_board[check.y][check.x] != params->player[0] &&\
-					params->game_board[check.y][check.x] != params->player[1])
-				{
-					opp_c.x += check.x;
-					opp_c.y += check.y;
-					++opp_size;
-				}
-			}
-			++check.x;
-		}
-		++check.y;
-	}
-	opp_c.x /= opp_size;
-	opp_c.y /= opp_size;
-	return (opp_c);
 }
 
 int	my_sqrt(int nb)
@@ -72,7 +38,10 @@ int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 	int tmp_dist;
 
 	i = 0;
-	opp_c = mid_points(params);
+	if (params->player[0] == 'X')
+		opp_c = mid_points(params, "Oo");
+	else
+		opp_c = mid_points(params, "Xx");
 	dist = my_sqrt(params->board_size.y * params->board_size.y + params->board_size.x * params->board_size.x);
 	tmp_dist = dist;
 	while(pos_size != 0)
@@ -129,7 +98,7 @@ t_coord		bsq(t_params *params)
 	sq.y = 0;
 	while (sq.y < params->board_size.y)
 	{
-	 	sq.x = 0;
+		sq.x = 0;
 		while (sq.x < params->board_size.x)
 		{
 			sq = test_sq(sq, params);
@@ -179,16 +148,13 @@ int find_top(t_params *params)
 	check.y = 0;
 	while (check.y < params->board_size.y)
 	{
-	 	check.x = 0;
+		check.x = 0;
 		while (check.x < params->board_size.x)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("top: ", 2);
-		ft_putnbr_fd(check.y, 2); 
-
-				return (check.y);				
+				return (check.y);
 			}
 
 			++check.x;
@@ -205,14 +171,12 @@ int find_bot(t_params *params)
 	check.y = params->board_size.y - 1;
 	while (check.y > -1)
 	{
-	 	check.x = 0;
+		check.x = 0;
 		while (check.x < params->board_size.x)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("bot: ", 2);
-		ft_putnbr_fd(check.y, 2); 
 				return (check.y);
 			}
 			++check.x;
@@ -229,14 +193,12 @@ int find_left(t_params *params)
 	check.x = 0;
 	while (check.x < params->board_size.x)
 	{
-	 	check.y = 0;
+		check.y = 0;
 		while (check.y < params->board_size.y)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-						ft_putendl_fd("left: ", 2);
-		ft_putnbr_fd(check.x, 2); 
 				return (check.x);
 			}
 			++check.y;
@@ -253,16 +215,13 @@ int find_right(t_params *params)
 	check.x = params->board_size.x - 1;
 	while (check.x > -1)
 	{
-	 	check.y = 0;
+		check.y = 0;
 		while (check.y < params->board_size.y)
 		{
 			if (params->game_board[check.y][check.x] == params->player[0] ||\
 				params->game_board[check.y][check.x] == params->player[1])
 			{
-		ft_putendl_fd("right: ", 2);
-		ft_putnbr_fd(check.x, 2); 
 				return (check.x);
-				
 			}
 			++check.y;
 		}
@@ -282,45 +241,6 @@ int check_square(t_params *params)
 	return (sq.height * sq.width);
 }
 
-int	place_piece(t_params *params, t_coord coord)
-{
-	t_coord pc;
-
-	pc.y = 0;
-	while (pc.y < params->piece_size_min.y)
-	{
-		pc.x = 0;
-		while (pc.x < params->piece_size_min.x)
-		{
-			if (params->game_board[coord.y + pc.y][coord.x + pc.x] == '.' &&\
-				params->game_piece_min[pc.y][pc.x] == '*')
-				params->game_board[coord.y + pc.y][coord.x + pc.x] = params->player[1];
-			++pc.x;
-		}
-		++pc.y;
-	}
-	return (1);
-}
-
-int	reset_piece(t_params *params, t_coord coord)
-{
-	t_coord pc;
-
-	pc.y = 0;
-	while (pc.y < params->piece_size_min.y)
-	{
-		pc.x = 0;
-		while (pc.x < params->piece_size_min.x)
-		{
-			if (params->game_board[coord.y + pc.y][coord.x + pc.x] == params->player[1])
-				params->game_board[coord.y + pc.y][coord.x + pc.x] = '.';
-			++pc.x;
-		}
-		++pc.y;
-	}
-	return (1);
-}
-
 int	easy_win_vs_qhonore(t_params *params, t_coord *pos, int pos_size, t_coord *to_play)
 {
 	int max;
@@ -334,9 +254,6 @@ int	easy_win_vs_qhonore(t_params *params, t_coord *pos, int pos_size, t_coord *t
 	{
 		place_piece(params, pos[i]);
 		sq_size = check_square(params);
-		ft_putendl_fd("sq_size: ", 2);
-		ft_putnbr_fd(sq_size, 2); 
-		
 		if (sq_size == (params->board_size.x * params->board_size.y))
 			return (go_close(to_play, pos_size, pos, params));
 		if (max < sq_size)
