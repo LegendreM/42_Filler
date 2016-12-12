@@ -6,16 +6,21 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:49:39 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/09 15:57:09 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/12 15:03:17 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-#include "wyki_ai.h"
+#include "ai_wyki.h"
 
 int		ft_abs(int n)
 {
 	return (n < 0 ? - n : n);
+}
+
+int		ft_max(int n1, int n2)
+{
+	return (n1 > n2 ? n1 : n2);
 }
 
 int		ft_sqrt(int nb)
@@ -106,20 +111,54 @@ int		rush_edge(t_coord *pos, t_square *op, int pos_size, t_axis axis)
 	return (2);
 }
 
+int		check_edge(t_params *params, char c, t_coord orig, t_coord end)
+{
+	int		x_cnt;
+	int		y_cnt;
+
+	ft_putendl_fd("In check edge 1", 2);
+	x_cnt = ft_max(orig.x, end.x) != 0
+				? ft_abs(orig.x - end.x) / ft_max(orig.x, end.x)
+				: 0;
+	y_cnt = ft_max(orig.y, end.y) != 0
+				? ft_abs(orig.y - end.y) / ft_max(orig.y, end.y)
+				: 0;
+	ft_putendl_fd("In check edge 2", 2);
+	while (orig.y <= end.y && orig.x <= end.x)
+	{
+		if (params->game_board[orig.y][orig.x] == c)
+			return (1);
+		orig.x += x_cnt;
+		orig.y += y_cnt;
+	}
+	return (0);
+}
+
 int		already_on_edges(t_params *params)
 {
 	t_coord	count;
-	int		x;
-	int		y;
 
 	count = (t_coord){0, 0};
+	count.x += check_edge(params, params->player[0],
+			(t_coord){0, 0},
+			(t_coord){params->board_size.x - 1, 0});
+	count.x += check_edge(params, params->player[0],
+			(t_coord){0, params->board_size.y - 1},
+			(t_coord){params->board_size.x - 1, params->board_size.y - 1});
+	count.y += check_edge(params, params->player[0],
+			(t_coord){0, 0},
+			(t_coord){0, params->board_size.y - 1});
+	count.y += check_edge(params, params->player[0],
+			(t_coord){params->board_size.x - 1, 0},
+			(t_coord){params->board_size.x - 1, params->board_size.y - 1});
+	/*
 	y = 0;
 	while (y < params->board_size.y)
 	{
 		x = 0;
 		while (x < params->board_size.x)
 		{
-			if (y != 0 && y != params->board_size.y - 1)
+			if (y != 0 && y != params->board_size.y - 1 && x != 0)
 				x =	params->board_size.x - 1;
 			if (params->game_board[y][x] == params->player[0])
 			{
@@ -130,8 +169,45 @@ int		already_on_edges(t_params *params)
 			++x;
 		}
 		y++;
-	}
+	}*/
 	return (count.x == 2 || count.y == 2 ? 1 : 0);
+}
+
+int			check_piece_edge(t_params *params, t_coord pos)
+{
+	int		ret;
+	t_coord	coor;
+
+	ret = 0;
+	coor = params->board_size;
+	if (pos.y == 0 && pos.x >= 0 && pos.x < coor.x)
+	{
+		ft_putendl_fd("Check north", 2);
+		ret += check_edge(params, params->player[0], (t_coord){0, 0},
+				(t_coord){coor.x - 1, 0});
+	}
+	if (pos.y == coor.y - 1 && pos.x >= 0 && pos.x < coor.x)
+	{
+		ft_putendl_fd("Check south", 2);
+		ret += check_edge(params, params->player[0], (t_coord){0, coor.y - 1},
+				(t_coord){coor.x - 1, coor.y - 1});
+	}
+	if (pos.x == 0 && pos.y >= 0 && pos.y < coor.y)
+	{
+		ft_putendl_fd("Check west", 2);
+		ret += check_edge(params, params->player[0], (t_coord){0, 0},
+				(t_coord){0, coor.y - 1});
+	}
+	if (pos.x == coor.x - 1 && pos.y >= 0 && pos.y < coor.y)
+	{
+		ft_putendl_fd("Check east", 2);
+		ret += check_edge(params, params->player[0], (t_coord){coor.x - 1, 0},
+				(t_coord){coor.x - 1, coor.y - 1});
+	}
+	ft_putstr_fd("Ret number = ", 2);
+	ft_putnbr_fd(ret, 2);
+	ft_putendl_fd("", 2);
+	return (ret);
 }
 
 int			is_edge_occupied(t_params *params, t_coord pos)
@@ -139,35 +215,22 @@ int			is_edge_occupied(t_params *params, t_coord pos)
 	int		x;
 	int		y;
 
-	x = 0;
 	y = 0;
-	if (pos.x == 0)
-		while (x < params->board_size.x)
+	ft_putendl_fd("In is edge occupied 1", 2);
+	while (y < params->piece_size_min.y)
+	{
+		x = 0;
+		while (x < params->piece_size_min.x)
 		{
-			if (params->game_board[y][x++] == params->player[0])
+			if (params->game_piece_min[y][x]
+					== '*'
+				&& check_piece_edge(params,
+					(t_coord){.x = pos.x + x, .y = pos.y + y}))
 				return (1);
+			++x;
 		}
-	y = params->board_size.y -1;
-	if (pos.x == params->board_size.x - 1)
-		while (x < params->board_size.x)
-		{
-			if (params->game_board[y][x++] == params->player[0])
-				return (1);
-		}
-	y = 0;
-	if (pos.y == 0)
-		while (y < params->board_size.y)
-		{
-			if (params->game_board[y++][x] == params->player[0])
-				return (1);
-		}
-	y = params->board_size.y -1;
-	if (pos.y == params->board_size.y - 1)
-		while (y < params->board_size.y)
-		{
-			if (params->game_board[y++][x] == params->player[0])
-				return (1);
-		}
+		++y;
+	}
 	return (0);
 }
 
@@ -179,18 +242,67 @@ int			in_square(t_coord pos, t_square *sq)
 	return (0);
 }
 
-t_coord		go_closer(t_coord *pos, int pos_size, t_square *op)
+int			count_ennemy(t_params *params, t_coord pos)
+{
+	int		ret;
+	char	op_c;
+
+	op_c = params->player[0] == 'O' ? 'X' : 'O';
+	ret = 0;
+	if (pos.x - 1 > 0 && params->game_board[pos.y][pos.x - 1] == op_c)
+		++ret;
+	if (pos.x + 1 < params->board_size.x
+			&& params->game_board[pos.y][pos.x + 1] == op_c)
+		++ret;
+	if (pos.y - 1 > 0 && params->game_board[pos.y - 1][pos.x] == op_c)
+		++ret;
+	if (pos.y + 1 < params->board_size.y
+			&& params->game_board[pos.y + 1][pos.x] == op_c)
+		++ret;
+	return (ret);
+}
+
+int			touch_ennemy(t_params *params, t_coord pos)
+{
+	int		ret;
+	int		x;
+	int		y;
+
+	y = 0;
+	ret = 0;
+	while (y < params->piece_size_min.y)
+	{
+		x = 0;
+		while (x < params->piece_size_min.x)
+		{
+			if (params->game_piece_min[y][x] == '*')
+				ret += count_ennemy(params, (t_coord){.x = x + pos.x,
+						.y = y + pos.y});
+			++x;
+		}
+		++y;
+	}
+	return (ret);
+}
+
+t_coord		go_closer(t_params *params, t_coord *pos, int pos_size, t_square *op)
 {
 	int		x;
+	int		touched_ennemies;
+	int		tmp;
 	t_coord	ret;
 
 	x = 0;
+	touched_ennemies = 0;
 	ret = pos_size > 0 ? pos[0] : (t_coord){0, 0};
 	while (x < pos_size)
 	{
 		if (get_distance(pos[x], op->center) <= get_distance(ret, op->center)
-			&& !in_square(pos[x], op))
+			&& (tmp = touch_ennemy(params, pos[x])) > touched_ennemies)
+		{
 			ret = pos[x];
+			touched_ennemies = tmp;
+		}
 		++x;
 	}
 	return (ret);
@@ -318,22 +430,15 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	t_square	op;
 
 	fill_squares(params, &me, &op);
-//	print_square(&me);
-//	print_square(&op);
 	pos_size = get_possible_positions(params, pos);
 	if (!already_on_edges(params))
 	{
 		pos_size = rush_edge(pos, &op, pos_size, get_axis(&me, &op));
-//		*to_play = get_distance(pos[0], op.center)
-//			> get_distance(pos[1], op.center) ? pos[1] : pos[0];
-		*to_play = in_square(pos[0], &op) ? pos[1] : pos[0];
-//		*to_play = is_edge_occupied(params, pos[0]) ? pos[1] : pos[0];
+		*to_play = is_edge_occupied(params, pos[0]) ? pos[1] : pos[0];
 	}
 	else
 	{
-		ft_putendl_fd("In else statement", 2);
-		*to_play = go_closer(pos, pos_size, &op);
-//		*to_play = pos_size != 0 ? pos[rand() % pos_size] : (t_coord){0, 0};
+		*to_play = go_closer(params, pos, pos_size, &op);
 	}
 	return(1);
 }
