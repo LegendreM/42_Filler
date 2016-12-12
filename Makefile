@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/07 15:44:54 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/12 15:55:11 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,11 @@ DV_SRC_NAME :=	$(SRC_NAME)\
 				ai/dv/ai_dv3
 
 WYKI_SRC_NAME :=	$(SRC_NAME)\
-					ai/wyki/ai_wyki
+					ai/wyki/ai_wyki\
+					ai/wyki/check_edge\
+					ai/wyki/is_edge_occupied\
+					ai/wyki/go_closer\
+					ai/wyki/square_functions
 
 EXT = .c
 

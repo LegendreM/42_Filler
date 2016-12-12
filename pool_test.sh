@@ -6,7 +6,7 @@
 #    By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 09:31:13 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/09 15:08:09 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/12 16:07:00 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,20 +30,24 @@ function	launch_vm
 	line=./players/hcao.filler
 
 	echo "Map $1" >> $RESULT
-	./filler_vm -f ./maps/map$1 -p1 $AI -p2 $line > $OUTPUT
-	tail -2 $OUTPUT >> $RESULT
+	for I in {1..5}
+	do
+		./filler_vm -f ./maps/map$1 -p1 $AI -p2 $line > $OUTPUT
+		tail -2 $OUTPUT >> $RESULT
 
-	SCORE1=$(tail -2 $OUTPUT | sed -n 1p)
-	SCORE1=${SCORE1##* }
-	SCORE2=$(tail -1 $OUTPUT)
-	SCORE2=${SCORE2##* }
+		SCORE1=$(tail -2 $OUTPUT | sed -n 1p)
+		SCORE1=${SCORE1##* }
+		SCORE2=$(tail -1 $OUTPUT)
+		SCORE2=${SCORE2##* }
 
-	if [ $SCORE1 -gt $SCORE2 ]
-	then
-		echo "\033[92;1mWIN\033[0m" >> $RESULT
-	else
-		echo "\033[91;1mLOOSE\033[0m" >> $RESULT
-	fi
+		if [ $SCORE1 -gt $SCORE2 ]
+		then
+			echo "$I : \033[92;1mWIN\033[0m" >> $RESULT
+		else
+			echo "$I : \033[91;1mLOOSE\033[0m" >> $RESULT
+		fi
+	done
+
 }
 
 function	main
@@ -60,11 +64,13 @@ function	main
 
 	find ./players -name '*.filler' | while read line
 	do
-	echo "$line"
-	echo "Test $(basename $AI) vs. $(basename $line)" >> $RESULT
-	launch_vm '00'
-	launch_vm '01'
-	launch_vm '02'
+		echo "$line"
+		echo "########## TEST ##########" >> $RESULT
+		echo "Test $(basename $AI) vs. $(basename $line)" >> $RESULT
+		launch_vm '00'
+		launch_vm '01'
+		launch_vm '02'
+		echo "##########################" >> $RESULT
 	done
 }
 
