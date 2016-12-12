@@ -35,11 +35,12 @@ SRC_NAME =	\
 			parser/ft_matrixdel\
 			ai/get_possible_positions\
 			ai/piece_placing\
-			ai/mid_points
-			ai/get_dist
+			ai/mid_points\
+			ai/get_dist\
+			ai/dv/opp_options
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv
+				ai/dv/ai_dv3
 
 WYKI_SRC_NAME :=	$(SRC_NAME)\
 					ai/wyki/ai_wyki
