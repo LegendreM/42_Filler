@@ -6,7 +6,7 @@
 #    By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 09:31:13 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/12 16:07:00 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/12 17:09:49 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,6 @@ function	ctrl_c
 
 function	launch_vm
 {
-	line=./players/hcao.filler
-
 	echo "Map $1" >> $RESULT
 	for I in {1..5}
 	do
