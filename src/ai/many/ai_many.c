@@ -69,13 +69,19 @@ static	t_list			*list_possible_position(t_params params)
 	return (list);
 }
 
+static	void	del_lst(void **content)
+{
+	if (*content)
+		free(content);
+}
+
 int				ai_launch(t_params *params, t_coord *to_play)
 {
 	t_list	*lst;
 
 	lst = list_possible_position(params);
-
-	if(easy_win_vs_qhonore(params, pos, pos_size, to_play))
-		return (1);
+	list_sort_by_weight(lst);
+	*to_play = ((t_pos *)lst->content)->coord;
+	ft_lstdel(&lst);
 	return(1);
 }
