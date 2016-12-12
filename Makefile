@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/07 15:44:54 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/12 15:55:11 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,22 @@ SRC_NAME =	\
 			ai/get_possible_positions\
 			ai/piece_placing\
 			ai/mid_points\
-			ai/get_dist
+			ai/get_dist\
+			ai/dv/opp_options
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv
+				ai/dv/ai_dv3
 
 MX_SRC_NAME :=	$(SRC_NAME)\
 				ai/many/ai_many\
 				ai/many/ai_many_lst_fnct
 
 WYKI_SRC_NAME :=	$(SRC_NAME)\
-					ai/wyki/ai_wyki
+					ai/wyki/ai_wyki\
+					ai/wyki/check_edge\
+					ai/wyki/is_edge_occupied\
+					ai/wyki/go_closer\
+					ai/wyki/square_functions
 
 EXT = .c
 
@@ -81,7 +86,7 @@ MLXLIBFT =	$(addprefix $(MLX_DIR),$(MLXLIBFT_NAME))
 NAME_TAR = transfer.tar
 
 
-all: $(DV) $(WYKI)
+all: $(DV) $(WYKI) $(MX)
 
 dv: $(DV)
 
