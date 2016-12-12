@@ -9,5 +9,5 @@ typedef struct	s_pos
 	int			s_weight;
 }				t_pos;
 
-t_list			*list_possible_position(t_params params);
+void			list_sort_by_weight(t_list *lst);
 #endif

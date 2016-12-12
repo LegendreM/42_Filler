@@ -48,7 +48,8 @@ static	int		get_area(t_params *params, int rob_size)
 	return (weight);
 }
 
-static	t_list			*list_possible_position(t_params params)
+
+static t_list			*list_possible_position(t_params *params)
 {
 	t_coord		pos[params->board_size.x * params->board_size.y];
 	int			pos_size;
@@ -63,16 +64,17 @@ static	t_list			*list_possible_position(t_params params)
 		tmp.coord = pos[pos_size];
 		tmp.p_weight = get_area(params, 4);
 		tmp.s_weight = get_area(params, 2);
-		ft_lstadd(&list, ft_lstnew((void *)tmp, sizeof(tmp)));
+		ft_lstadd(&list, ft_lstnew((void *)&tmp, sizeof(tmp)));
 		reset_piece(params, pos[pos_size]);
 	}
 	return (list);
 }
 
-static	void	del_lst(void **content)
+static	void	del_lst(void *content, size_t size)
 {
-	if (*content)
-		free(content);
+	(void)size;
+	if (content)
+		ft_memdel(&content);
 }
 
 int				ai_launch(t_params *params, t_coord *to_play)
@@ -81,7 +83,8 @@ int				ai_launch(t_params *params, t_coord *to_play)
 
 	lst = list_possible_position(params);
 	list_sort_by_weight(lst);
-	*to_play = ((t_pos *)lst->content)->coord;
-	ft_lstdel(&lst);
+	if (lst)
+		*to_play = ((t_pos *)lst->content)->coord;
+	ft_lstdel(&lst, del_lst);
 	return(1);
 }
