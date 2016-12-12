@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_game_board.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/12 16:20:50 by jle-mene          #+#    #+#             */
+/*   Updated: 2016/12/12 17:00:12 by jle-mene         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
 void	draw_game_board(t_mlx_image_8u *dst,
@@ -9,7 +21,7 @@ void	draw_game_board(t_mlx_image_8u *dst,
 
 	clear_image_8u(dst, create_pixel_8u(0x2f, 0x2f, 0x2f, 0x00));
 	rack = draw_game_rack(dst, create_pixel_8u(0x9f, 0x9f, 0x9f, 0x00),
-					 params->board_size.x, params->board_size.y);
+			params->board_size.x, params->board_size.y);
 	i = 0;
 	while (i < params->board_size.x * params->board_size.y)
 	{
@@ -23,4 +35,6 @@ void	draw_game_board(t_mlx_image_8u *dst,
 		}
 		++i;
 	}
+	free(rack);
+	return ;
 }

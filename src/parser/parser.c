@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:21:13 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/07 16:55:41 by mlegendr         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:39:28 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,56 +86,6 @@ static int	check_input(char *line, t_params *params)
 	}
 	return (1);
 }
-
-/*
-static void	print_matrix(char **map, t_coord size)
-{
-	int		y;
-
-	y = 0;
-	while (y < size.y)
-	{
-		write(2, map[y++], size.x);
-		write(2, "\n", 1);
-	}
-}
-
-void	print_params(t_params *params)
-{
-	ft_putendl_fd("##### PRINT PARAMS #####", 2);
-
-	ft_putstr_fd("Player : ", 2);
-	ft_putendl_fd(params->player, 2);
-
-	ft_putstr_fd("Board size : y=", 2);
-	ft_putnbr_fd(params->board_size.y, 2);
-	ft_putstr_fd(" x=", 2);
-	ft_putnbr_fd(params->board_size.x, 2);
-	ft_putendl_fd("", 2);
-	print_matrix(params->game_board, params->board_size);
-
-	ft_putstr_fd("Piece size : y=", 2);
-	ft_putnbr_fd(params->piece_size.y, 2);
-	ft_putstr_fd(" x=", 2);
-	ft_putnbr_fd(params->piece_size.x, 2);
-	ft_putendl_fd("", 2);
-	print_matrix(params->game_piece, params->piece_size);
-
-	ft_putstr_fd("Piece size min : y=", 2);
-	ft_putnbr_fd(params->piece_size_min.y, 2);
-	ft_putstr_fd(" x=", 2);
-	ft_putnbr_fd(params->piece_size_min.x, 2);
-	ft_putendl_fd("", 2);
-	ft_putstr_fd("Piece size orig : y=", 2);
-	ft_putnbr_fd(params->piece_orig.y, 2);
-	ft_putstr_fd(" x=", 2);
-	ft_putnbr_fd(params->piece_orig.x, 2);
-	ft_putendl_fd("", 2);
-	print_matrix(params->game_piece_min, params->piece_size_min);
-
-	ft_putendl_fd("########################", 2);
-}
-*/
 
 t_params	*parser(t_params *params)
 {

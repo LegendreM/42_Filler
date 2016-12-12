@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 15:45:58 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/12 15:56:08 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:10:09 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ int			check_edge(t_params *params, char c, t_coord orig, t_coord end)
 	int		x_cnt;
 	int		y_cnt;
 
-	ft_putendl_fd("In check edge 1", 2);
 	x_cnt = ft_max(orig.x, end.x) != 0
 				? ft_abs(orig.x - end.x) / ft_max(orig.x, end.x)
 				: 0;
 	y_cnt = ft_max(orig.y, end.y) != 0
 				? ft_abs(orig.y - end.y) / ft_max(orig.y, end.y)
 				: 0;
-	ft_putendl_fd("In check edge 2", 2);
 	while (orig.y <= end.y && orig.x <= end.x)
 	{
 		if (params->game_board[orig.y][orig.x] == c)

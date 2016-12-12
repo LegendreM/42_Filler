@@ -6,18 +6,25 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 11:19:24 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/08 12:59:13 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:37:37 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#if GUI
 
 int				main(void)
 {
-# if GUI
 	start_gui();
-# else
-	start_filler();
-# endif
 	return (0);
 }
+
+#else
+
+int				main(void)
+{
+	start_filler();
+	return (0);
+}
+
+#endif

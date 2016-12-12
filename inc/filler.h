@@ -93,4 +93,5 @@ t_coord		mid_points(t_params *params, char player[3]);
 int			place_piece(t_params *params, t_coord coord);
 int			reset_piece(t_params *params, t_coord coord);
 int			get_dist(t_coord start_point, t_coord end_point);
+
 #endif
