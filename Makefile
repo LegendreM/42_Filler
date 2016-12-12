@@ -37,10 +37,11 @@ SRC_NAME =	\
 			ai/piece_placing\
 			ai/mid_points\
 			ai/get_dist\
-			ai/dv/opp_options
+			ai/dv/opp_options\
+			ai/dv/t_coord_init
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv3
+				ai/dv/ai_dv4
 
 WYKI_SRC_NAME :=	$(SRC_NAME)\
 					ai/wyki/ai_wyki\

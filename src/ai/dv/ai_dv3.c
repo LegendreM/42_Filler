@@ -1,11 +1,5 @@
 #include "ai_dv.h"
 
-void 		my_t_coord_init(t_coord *coord)
-{
-	coord->x = 0;
-	coord->y = 0;
-}
-
 static int	block_opp(t_params *params, t_coord coord, t_coord check,
 				int *blocked, char opp_game_board[params->board_size.y][params->board_size.x])
 {
@@ -43,7 +37,7 @@ void	opp_game_board_init(t_params *params, char opp_game_board[params->board_siz
 {
 	t_coord check;
 
-	my_t_coord_init(&check);
+	t_coord_init(&check);
 	while (check.y < params->board_size.y)
 	{
 		check.x = 0;
@@ -68,7 +62,7 @@ int		go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me,
 	i = 0;
 	max_block = 0;
 	tmp_block = 0;
-	my_t_coord_init(&check);
+	t_coord_init(&check);
 	opp_game_board_init(params, opp_game_board);
 	while (pos_size.opp != 0)
 	{
@@ -88,8 +82,6 @@ int		go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me,
 		++i;
 		--pos_size.me;
 	}
-		ft_putnbr_fd(ret, 2);
-
 	return (ret);
 }
 
@@ -132,12 +124,10 @@ int		ai_launch(t_params *params, t_coord *to_play)
 	opp_options(params,	&pos_size.opp, opp);
 	if (go_pwned(params, pos_size, opp, me, to_play) > 0)
 	{
-		ft_putendl_fd("pwned", 2);
 		return (1);
 	}
 	else 
 	{
-				ft_putendl_fd("close", 2);
 		go_close(to_play, pos_size.me, me, params);
 	}
 	return (1);

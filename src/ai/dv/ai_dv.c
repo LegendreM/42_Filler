@@ -38,10 +38,7 @@ int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 	int tmp_dist;
 
 	i = 0;
-	if (params->player[0] == 'X')
-		opp_c = mid_points(params, "Oo");
-	else
-		opp_c = mid_points(params, "Xx");
+	opp_c = mid_points(params);
 	dist = my_sqrt(params->board_size.y * params->board_size.y + params->board_size.x * params->board_size.x);
 	tmp_dist = dist;
 	while(pos_size != 0)

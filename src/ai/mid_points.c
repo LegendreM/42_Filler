@@ -2,12 +2,6 @@
 #include "filler.h"
 #include "ai_dv.h"
 
-void 		t_coord_init(t_coord *coord)
-{
-	coord->x = 0;
-	coord->y = 0;
-}
-
 void 		t_coord_average(t_coord *coord, int nb)
 {
 	coord->x /= nb;
