@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_game_rack.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/12 16:23:13 by jle-mene          #+#    #+#             */
+/*   Updated: 2016/12/12 16:23:15 by jle-mene         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
-static	t_roi	*save_cases(const t_coord	rack_size,
-							const t_roi		roi)
+static	t_roi	*save_cases(const t_coord rack_size,
+							const t_roi roi)
 {
-	t_roi	*rack;
-	int		i;
-	t_coord	coord;
+	t_roi			*rack;
+	int				i;
+	t_coord			coord;
 	const t_coord	case_size = {.x = roi.width / rack_size.x,
 
 	.y = roi.height / rack_size.y};
@@ -30,10 +42,10 @@ static	t_roi	*save_cases(const t_coord	rack_size,
 	return (rack);
 }
 
-t_roi	*draw_game_rack(t_mlx_image_8u *dst,
-						const t_pixel_8u pixel,
-						const int rack_width,
-						const int rack_height)
+t_roi			*draw_game_rack(t_mlx_image_8u *dst,
+								const t_pixel_8u pixel,
+								const int rack_width,
+								const int rack_height)
 {
 	const int		ww = dst->width;
 	const int		wh = dst->height;

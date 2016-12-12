@@ -1,1 +1,0 @@
-../libft/inc/libft.h
