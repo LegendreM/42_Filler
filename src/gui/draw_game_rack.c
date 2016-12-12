@@ -50,9 +50,9 @@ t_roi			*draw_game_rack(t_mlx_image_8u *dst,
 	const int		ww = dst->width;
 	const int		wh = dst->height;
 	const t_coord	rack_size = {.x = rack_width, .y = rack_height};
-	const t_roi		roi = create_roi(ww / 10, wh / 10,
+	const t_roi		roi = create_roi(ww / 20, wh / 20,
 
-	ww * 8 / 10, wh * 8 / 10);
+	ww * 9 / 10, wh * 9 / 10);
 	draw_rack(dst, roi, pixel, rack_size);
 	return (save_cases(rack_size, roi));
 }

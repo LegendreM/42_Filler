@@ -58,8 +58,8 @@ int				start_gui(void)
 	t_mlx_env		mlx;
 	t_env			env;
 
-	mlx.win_width = 1200;
-	mlx.win_height = 600;
+	mlx.win_width = 2000;
+	mlx.win_height = 2000;
 	if (!(mlx.ptr = mlx_init()))
 		return (1);
 	if (!(mlx.win = mlx_new_window(mlx.ptr,

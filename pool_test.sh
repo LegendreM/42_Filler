@@ -14,10 +14,10 @@
 
 trap ctrl_c INT
 
-AI=./players/wyki.filler
+AI=./players/many.filler
 
 RESULT=./pool_test_result.txt
-OUTPUT=/tmp/test.txt
+OUTPUT=/tmp/max.txt
 
 function	ctrl_c
 {
