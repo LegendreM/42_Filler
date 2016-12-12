@@ -2,7 +2,7 @@
 
 # define FILLER_H
 
-# define GUI 1
+# define GUI 0
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 10000
@@ -88,7 +88,7 @@ void		ft_matrixdel(char **map);
  */
 int			ai_launch(t_params *params, t_coord *to_play);
 int			get_possible_positions(t_params *params, t_coord *pos);
-t_coord		mid_points(t_params *params, char player[3]);
+t_coord		mid_points(t_params *params);
 int			place_piece(t_params *params, t_coord coord);
 int			reset_piece(t_params *params, t_coord coord);
 int			get_dist(t_coord start_point, t_coord end_point);
