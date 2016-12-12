@@ -6,46 +6,50 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 17:11:52 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/12 17:20:46 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:26:49 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#include "ai_dv.h"
 
-static void	init(t_coord *coor, t_coord *coor2, int *i)
+void	t_coord_init(t_coord *coord)
 {
-	coor->x = 0;
-	coor->y = 0;
-	coor2->y = 0;
-	*i = 0;
-	return ;
+	coord->x = 0;
+	coord->y = 0;
 }
 
-t_coord		mid_points(t_params *params, char player[3])
+void	t_coord_average(t_coord *coord, int nb)
 {
-	t_coord	opp_c;
-	int		opp_size;
-	t_coord	check;
+	coord->x /= nb;
+	coord->y /= nb;
+}
 
-	init(&opp_c, &check, &opp_size);
+t_coord		mid_points(t_params *params)
+{
+	t_coord opp_c;
+	int 	opp_size;
+	t_coord check;
+
+	t_coord_init(&opp_c);
+	opp_size = 0;
+	check.y = 0;
 	while (check.y < params->board_size.y)
 	{
 		check.x = 0;
 		while (check.x < params->board_size.x)
 		{
 			if (params->game_board[check.y][check.x] != '.')
-				if (params->game_board[check.y][check.x] == player[0] &&\
-					params->game_board[check.y][check.x] == player[1])
+				if (params->game_board[check.y][check.x] != params->player[0] &&\
+					params->game_board[check.y][check.x] != params->player[1] && ++opp_size)
 				{
 					opp_c.x += check.x;
 					opp_c.y += check.y;
-					++opp_size;
 				}
 			++check.x;
 		}
 		++check.y;
 	}
-	opp_c.x /= opp_size;
-	opp_c.y /= opp_size;
+	t_coord_average(&opp_c, opp_size);
 	return (opp_c);
 }

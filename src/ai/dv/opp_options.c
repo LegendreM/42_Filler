@@ -1,6 +1,4 @@
-int			get_possible_positions(t_params *params, t_coord *pos)
-	// t_coord		pos[params->board_size.x * params->board_size.y];
-
+#include "ai_dv.h"
 
 int		change_player(t_params *params)
 {
@@ -22,7 +20,7 @@ int		change_player(t_params *params)
 	return (1);
 }
 
-opp_options(t_params *params, int *pos_size, t_coord *pos)
+void	opp_options(t_params *params, int *pos_size, t_coord *pos)
 {
 	change_player(params);
 	*pos_size = get_possible_positions(params, pos);

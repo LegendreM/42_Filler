@@ -16,6 +16,9 @@ FILLER_EXT = .filler
 DV_NAME = dv
 DV = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(DV_NAME)))
 
+MX_NAME = many
+MX = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(MX_NAME)))
+
 WYKI_NAME = wyki
 WYKI = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(WYKI_NAME)))
 
@@ -36,10 +39,15 @@ SRC_NAME =	\
 			ai/get_possible_positions\
 			ai/piece_placing\
 			ai/mid_points\
-			ai/get_dist
+			ai/get_dist\
+			ai/dv/opp_options
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv
+				ai/dv/ai_dv3
+
+MX_SRC_NAME :=	$(SRC_NAME)\
+				ai/many/ai_many\
+				ai/many/ai_many_lst_fnct
 
 WYKI_SRC_NAME :=	$(SRC_NAME)\
 					ai/wyki/ai_wyki\
@@ -66,6 +74,9 @@ MLX_FLAGS =	./mlxlibft/mlxlibft.a -lmlx -framework OpenGL -framework AppKit
 DV_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(DV_SRC_NAME)))
 DV_OBJ =	$(addprefix $(OBJ_DIR), $(DV_SRC:.c=.o))
 
+MX_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(MX_SRC_NAME)))
+MX_OBJ =	$(addprefix $(OBJ_DIR), $(MX_SRC:.c=.o))
+
 WYKI_SRC =	$(addprefix $(SRC_DIR), $(addsuffix $(EXT), $(WYKI_SRC_NAME)))
 WYKI_OBJ =	$(addprefix $(OBJ_DIR), $(WYKI_SRC:.c=.o))
 
@@ -75,15 +86,21 @@ MLXLIBFT =	$(addprefix $(MLX_DIR),$(MLXLIBFT_NAME))
 NAME_TAR = transfer.tar
 
 
-all: $(DV) $(WYKI)
+all: $(DV) $(WYKI) $(MX)
 
 dv: $(DV)
+
+mx: $(MX)
 
 wyki: $(WYKI)
 
 $(DV): $(LIBFT) $(MLXLIBFT) $(DV_OBJ)
 	@$(CC) $(MLX_FLAGS) $^ -o $@
 	@echo "\033[92;1mDV Filler compiled\033[0m";
+
+$(MX): $(LIBFT) $(MLXLIBFT) $(MX_OBJ)
+	@$(CC) $(MLX_FLAGS) $^ -o $@
+	@echo "\033[92;1mMX Filler compiled\033[0m";
 
 $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
 	@$(CC) $(MLX_FLAGS) $^ -o $@
