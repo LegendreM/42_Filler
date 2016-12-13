@@ -28,7 +28,7 @@ int	my_sqrt(int nb)
 	return (i);
 }
 /*
-	best position close to opponent
+**	best position close to opponent
 */
 int		go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
 {

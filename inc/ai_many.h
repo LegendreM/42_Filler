@@ -22,5 +22,5 @@ typedef struct	s_pos
 }				t_pos;
 
 void			list_sort_by_weight(t_list *lst);
-
+void			del_lst(void *content, size_t size);
 #endif
