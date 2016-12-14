@@ -2,7 +2,7 @@
 
 # define FILLER_H
 
-# define GUI 1
+# define GUI 0
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 5000

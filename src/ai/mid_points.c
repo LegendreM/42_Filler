@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
 #include "ai_dv.h"
 
-void 		t_coord_average(t_coord *coord, int nb)
+void		t_coord_average(t_coord *coord, int nb)
 {
 	coord->x /= nb;
 	coord->y /= nb;
@@ -21,9 +20,9 @@ void 		t_coord_average(t_coord *coord, int nb)
 
 t_coord		mid_points(t_params *params)
 {
-	t_coord opp_c;
-	int 	opp_size;
-	t_coord check;
+	t_coord	opp_c;
+	int		opp_size;
+	t_coord	check;
 
 	t_coord_init(&opp_c);
 	opp_size = 0;
