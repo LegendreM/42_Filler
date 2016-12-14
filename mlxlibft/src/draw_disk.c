@@ -19,8 +19,8 @@ void	draw_x_line(t_mlx_image_8u *dst,
 {
 	int					i;
 	t_color_8u			*data;
-	const int			end = begin.y * dst->width + begin.x + size;
-	const t_color_8u	color = pixel_to_color_8u(pixel);
+	const	int			end = begin.y * dst->width + begin.x + size;
+	const	t_color_8u	color = pixel_to_color_8u(pixel);
 
 	i = begin.y * dst->width + begin.x;
 	data = (t_color_8u*)dst->data;
@@ -36,9 +36,9 @@ void	draw_disk(t_mlx_image_8u *dst,
 				const int radius,
 				const t_pixel_8u pixel)
 {
-	int 	x;
-	int 	y;
-	int 	err;
+	int		x;
+	int		y;
+	int		err;
 
 	x = radius;
 	y = 0;

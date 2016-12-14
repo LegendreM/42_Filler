@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filler.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/13 09:14:11 by jle-mene          #+#    #+#             */
+/*   Updated: 2016/12/13 09:22:23 by jle-mene         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FILLER_H
 
 # define FILLER_H
 
-# define GUI 0
+# define GUI 1
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 5000
-
 
 # include <math.h>
 # include <mlx.h>
@@ -18,23 +29,7 @@
 # include "get_next_line.h"
 
 /*
-@name: t_params
-@brief: struct returned by parser and passed as parameter to AI
-@attr:
-	@name: game_board
-	@type: char**
-	@brief: map of the game,
-	each line finish by '\0'
-	the last line is a null pointer
-@attr:
-	@name: game_piece
-	@type: char**
-	@brief: piece to place on the game_board,
-	each line finish by '\0'
-	the last line is a null pointer
-@attr:
-	@name: coord
-	@brief: struct wich contain coord of game_piece
+**	STRUCTURES
 */
 
 typedef struct	s_params
@@ -58,40 +53,40 @@ typedef struct	s_env
 }				t_env;
 
 /*
- *	GUI
- */
+**	GUI
+*/
 
-int			start_gui(void);
-int			loop_hook(t_env *env);
-int			expose(t_env *env);
-t_roi		*draw_game_rack(
-				t_mlx_image_8u *dst,
-				const t_pixel_8u pixel,
-				const int rack_width,
-				const int rack_height
-			);
-void		draw_game_board(t_mlx_image_8u *dst,
-				const t_params *params);
-
-/*
- *	PARSER
- */
-
-void		start_filler(void);
-t_params	*parser(t_params *params);
-void		set_piece(char *line, t_params *params);
-void		play(t_coord params, int x, int y);
-char		**ft_matrixnew(const size_t y, const size_t x);
-void		ft_matrixdel(char **map);
+int				start_gui(void);
+int				loop_hook(t_env *env);
+int				expose(t_env *env);
+t_roi			*draw_game_rack(
+					t_mlx_image_8u *dst,
+					const t_pixel_8u pixel,
+					const int rack_width,
+					const int rack_height);
+void			draw_game_board(t_mlx_image_8u *dst,
+					const t_params *params);
 
 /*
- *	AI
- */
-int			ai_launch(t_params *params, t_coord *to_play);
-int			get_possible_positions(t_params *params, t_coord *pos);
-t_coord		mid_points(t_params *params);
-int			place_piece(t_params *params, t_coord coord);
-int			reset_piece(t_params *params, t_coord coord);
-int			get_dist(t_coord start_point, t_coord end_point);
+**	PARSER
+*/
+
+void			start_filler(void);
+t_params		*parser(t_params *params);
+void			set_piece(char *line, t_params *params);
+void			play(t_coord params, int x, int y);
+char			**ft_matrixnew(const size_t y, const size_t x);
+void			ft_matrixdel(char **map);
+
+/*
+**	AI
+*/
+
+int				ai_launch(t_params *params, t_coord *to_play);
+int				get_possible_positions(t_params *params, t_coord *pos);
+t_coord			mid_points(t_params *params);
+int				place_piece(t_params *params, t_coord coord);
+int				reset_piece(t_params *params, t_coord coord);
+int				get_dist(t_coord start_point, t_coord end_point);
 
 #endif

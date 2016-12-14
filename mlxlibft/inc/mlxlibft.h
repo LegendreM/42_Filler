@@ -6,11 +6,12 @@
 /*   By: mlegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 15:54:59 by mlegendr          #+#    #+#             */
-/*   Updated: 2016/03/21 15:55:02 by mlegendr         ###   ########.fr       */
+/*   Updated: 2016/12/13 09:23:09 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLXLIBFT_H
+
 # define MLXLIBFT_H
 # define KEYPRESSMASK	(1L<<0)
 # define KEYRELEASEMASK	(1L<<1)
@@ -66,8 +67,6 @@ typedef	struct	s_pixel_8u
 	t_sample_8u	alpha;
 }				t_pixel_8u;
 
-
-
 t_mlx_image_8u	*new_mlx_image_8u(void *mlx_ptr, int width, int height);
 t_mlx_image_8u	*new_mlx_xpm_image_8u(void *mlx_ptr, char *filename);
 void			free_mlx_image_8u(void *mlx_ptr, t_mlx_image_8u *image);
@@ -112,4 +111,5 @@ void			draw_disk_in_roi(
 				const t_pixel_8u pixel);
 t_color_8u		pixel_to_color_8u(const t_pixel_8u pixel);
 t_pixel_8u		color_to_pixel_8u(const t_color_8u color);
+
 #endif

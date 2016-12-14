@@ -1,31 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ai_many.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/12 17:11:52 by jle-mene          #+#    #+#             */
+/*   Updated: 2016/12/12 17:26:49 by jle-mene         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
 #include "ai_many.h"
 
+static	void	ajust_rob(t_params *params, t_roi *rob)
+{
+	if (rob->x + rob->width > params->board_size.x)
+		rob->width = params->board_size.x - rob->x;
+	if (rob->y + rob->height > params->board_size.y)
+		rob->height = params->board_size.y - rob->y;
+}
+
 static	int		is_player_in_rob(t_params *params, t_roi rob)
 {
 	t_coord crd;
+	int		weight[2];
 
-	if (rob.x + rob.width > params->board_size.x)
-		rob.width = params->board_size.x - rob.x;
-	if (rob.y + rob.height > params->board_size.y)
-		rob.height = params->board_size.y - rob.y;
-	crd.y = 0;
-	while (crd.y < rob.height)
+	ajust_rob(params, &rob);
+	crd.y = -1;
+	weight[0] = 0;
+	weight[1] = 0;
+	while (++crd.y < rob.height)
 	{
-		crd.x = 0;
-		while (crd.x < rob.width)
-		{
-			if (params->game_board[crd.y + rob.y][crd.x + rob.x]\
-				== params->player[0]|| \
-				params->game_board[crd.y + rob.y][crd.x + rob.x]\
-				== params->player[1])
-				return (1);
-			++crd.x;
-		}
-		++crd.y;
+		crd.x = -1;
+		while (++crd.x < rob.width)
+			if (params->game_board[crd.y + rob.y][crd.x + rob.x] != '.')
+			{
+				if (params->game_board[crd.y + rob.y][crd.x + rob.x]\
+					== params->player[0] || \
+					params->game_board[crd.y + rob.y][crd.x + rob.x]\
+					== params->player[1])
+					weight[0] = 1;
+				else
+					weight[1] = 1;
+			}
 	}
-	return (0);
+	return ((weight[0] > 0) ? weight[0] + weight[1] : 0);
 }
 
 static	int		get_area(t_params *params, int rob_size)
@@ -48,8 +68,7 @@ static	int		get_area(t_params *params, int rob_size)
 	return (weight);
 }
 
-
-static t_list			*list_possible_position(t_params *params)
+static t_list	*list_possible_position(t_params *params)
 {
 	t_coord		pos[params->board_size.x * params->board_size.y];
 	int			pos_size;
@@ -70,13 +89,6 @@ static t_list			*list_possible_position(t_params *params)
 	return (list);
 }
 
-static	void	del_lst(void *content, size_t size)
-{
-	(void)size;
-	if (content)
-		ft_memdel(&content);
-}
-
 int				ai_launch(t_params *params, t_coord *to_play)
 {
 	t_list	*lst;
@@ -86,5 +98,5 @@ int				ai_launch(t_params *params, t_coord *to_play)
 	if (lst)
 		*to_play = ((t_pos *)lst->content)->coord;
 	ft_lstdel(&lst, del_lst);
-	return(1);
+	return (1);
 }
