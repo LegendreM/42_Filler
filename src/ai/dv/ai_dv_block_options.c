@@ -137,7 +137,8 @@ int			go_pwned(t_params *params, t_game_size pos_size, t_coord *opp, t_coord *me
 	return (ret);
 }
 
-int			go_close(t_coord *to_play, int pos_size, t_coord *pos, t_params *params)
+int			go_close(t_coord *to_play, int pos_size, \
+					t_coord *pos, t_params *params)
 {
 	t_coord opp_c;
 	int		i;
@@ -171,14 +172,13 @@ int			ai_launch(t_params *params, t_coord *to_play)
 
 	to_play->x = 0;
 	to_play->y = 0;
-
 	pos_size.me = get_possible_positions(params, me);
-	opp_options(params,	&pos_size.opp, opp);
+	opp_options(params, &pos_size.opp, opp);
 	if (go_pwned(params, pos_size, opp, me, to_play) > 0)
 	{
 		return (1);
 	}
-	else 
+	else
 	{
 		go_around(to_play, pos_size.me, me, params);
 	}
