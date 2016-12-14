@@ -40,11 +40,10 @@ SRC_NAME =	\
 			ai/piece_placing\
 			ai/mid_points\
 			ai/get_dist\
-			ai/dv/opp_options\
 			ai/dv/t_coord_init
 
 DV_SRC_NAME :=	$(SRC_NAME)\
-				ai/dv/ai_dv_go_close
+				ai/dv/ai_dv_go_around
 
 MX_SRC_NAME :=	$(SRC_NAME)\
 				ai/many/ai_many\
