@@ -6,7 +6,7 @@
 #    By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 09:31:13 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/12 17:09:49 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/14 10:50:53 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@
 
 trap ctrl_c INT
 
-AI=./players/many.filler
+AI=./players/wyki.filler
 
 RESULT=./pool_test_result.txt
-OUTPUT=/tmp/max.txt
+OUTPUT=/tmp/test.txt
 
 function	ctrl_c
 {

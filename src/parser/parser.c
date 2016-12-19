@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 17:21:13 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/12 16:39:28 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/19 09:08:17 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	check_input(char *line, t_params *params)
 		if (params->player[0] == '\0'
 				&& ft_strstr((const char *)line, "$$$ exec") != NULL)
 			set_player(line, params);
+		else if (params->player[0] == '\0')
+			return (0);
 		else if (ft_strstr((const char *)line, "Plateau"))
 			set_board(line, params);
 		else if (ft_strstr((const char *)line, "Piece"))

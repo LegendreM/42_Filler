@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 09:14:11 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/13 09:22:23 by jle-mene         ###   ########.fr       */
+/*   Updated: 2016/12/19 09:07:27 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 # define FILLER_H
 
-# define GUI 1
+# define GUI 0
 # define BUFFSIZE 8
 # define FD 0
 # define SPEED 5000
 
+# include <limits.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdlib.h>

@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/12 15:55:11 by jle-mene         ###   ########.fr        #
+#    Updated: 2016/12/15 09:39:00 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,11 +108,9 @@ $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
-	@echo "\033[92;1mLibftprintf compiled\033[0m";
 
 $(MLXLIBFT):
 	@$(MAKE) -C $(MLX_DIR)
-	@echo "\033[92;1mMlxLibft compiled\033[0m";
 
 $(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
