@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 09:35:12 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/15 09:35:13 by jle-mene         ###   ########.fr       */
+/*   Updated: 2017/01/06 11:32:31 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_params	*init_params(t_params *params)
 	if ((params = (t_params *)malloc(sizeof(t_params))) == NULL)
 	{
 		ft_putendl_fd("CANNOT MALLLOC IN INIT", 2);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	params->game_board = NULL;
 	params->game_piece = NULL;
@@ -45,12 +45,15 @@ static t_params	*init_params(t_params *params)
 	return (params);
 }
 
-static void		init_env(t_env *env, t_mlx_env *mlx)
+static int		init_env(t_env *env, t_mlx_env *mlx)
 {
 	env->params = init_params(NULL);
+	if (env->params == NULL)
+		return (1);
 	env->mlx = mlx;
 	env->win_img = new_mlx_image_8u(
 					env->mlx->ptr, env->mlx->win_width, env->mlx->win_height);
+	return (0);
 }
 
 int				start_gui(void)
@@ -61,15 +64,16 @@ int				start_gui(void)
 	mlx.win_width = 2000;
 	mlx.win_height = 1200;
 	if (!(mlx.ptr = mlx_init()))
-		return (1);
+		return (EXIT_FAILURE);
 	if (!(mlx.win = mlx_new_window(mlx.ptr,
 		mlx.win_width, mlx.win_height, "filler")))
-		return (1);
-	init_env(&env, &mlx);
+		return (EXIT_FAILURE);
+	if (init_env(&env, &mlx) != 0)
+		return (EXIT_FAILURE);
 	mlx_hook(env.mlx->win, KEYPRESS, KEYPRESSMASK, key_press, &env);
 	mlx_hook(env.mlx->win, KEYRELEASE, KEYRELEASEMASK, key_release, &env);
 	mlx_hook(env.mlx->win, REDCROSS, REDCROSSMASK, red_cross, 0);
 	mlx_loop_hook(env.mlx->ptr, loop_hook, &env);
 	mlx_loop(env.mlx->ptr);
-	return (0);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jle-mene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/13 09:14:11 by jle-mene          #+#    #+#             */
-/*   Updated: 2016/12/19 09:07:27 by jle-mene         ###   ########.fr       */
+/*   Updated: 2017/01/06 11:34:25 by jle-mene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			draw_game_board(t_mlx_image_8u *dst,
 **	PARSER
 */
 
-void			start_filler(void);
+int				start_filler(void);
 t_params		*parser(t_params *params);
 void			set_piece(char *line, t_params *params);
 void			play(t_coord params, int x, int y);
