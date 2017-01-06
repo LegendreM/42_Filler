@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2017/01/06 11:57:22 by jle-mene         ###   ########.fr        #
+#    Updated: 2017/01/06 12:04:42 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ $(MX): $(LIBFT) $(MLXLIBFT) $(MX_OBJ)
 
 $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
 	@$(CC) $(MLX_FLAGS) $^ -o $@
+	cp $(WYKI) ./
 	@echo "\033[92;1mWYKI Filler compiled\033[0m";
 
 $(LIBFT):
