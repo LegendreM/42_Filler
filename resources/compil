@@ -1,1 +1,0 @@
-./filler_vm -f maps/map00 -p1 players/titi.filler 2>titi.log
