@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2016/12/15 09:39:00 by jle-mene         ###   ########.fr        #
+#    Updated: 2017/01/06 11:57:22 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ DV = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(DV_NAME)))
 MX_NAME = many
 MX = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(MX_NAME)))
 
-WYKI_NAME = wyki
+WYKI_NAME = jle-mene
 WYKI = $(addprefix $(FILLER_DIR), $(addsuffix $(FILLER_EXT), $(WYKI_NAME)))
 
 SRC_NAME =	\
