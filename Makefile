@@ -6,7 +6,7 @@
 #    By: wykiki <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/28 15:17:47 by jle-mene          #+#    #+#              #
-#    Updated: 2017/01/06 12:04:42 by jle-mene         ###   ########.fr        #
+#    Updated: 2017/02/09 10:35:03 by jle-mene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(MX): $(LIBFT) $(MLXLIBFT) $(MX_OBJ)
 
 $(WYKI): $(LIBFT) $(MLXLIBFT) $(WYKI_OBJ)
 	@$(CC) $(MLX_FLAGS) $^ -o $@
-	cp $(WYKI) ./
+	@cp $(WYKI) ./
 	@echo "\033[92;1mWYKI Filler compiled\033[0m";
 
 $(LIBFT):
@@ -119,6 +119,8 @@ $(OBJ_DIR)%.o: %.c
 
 clean:
 	@rm -rf $(DV_OBJ)
+	@rm -rf $(WYKI_OBJ)
+	@rm -rf $(MANY_OBJ)
 	@echo "\033[91;1mFiller objects removed\033[0m";
 
 lclean:
@@ -126,7 +128,10 @@ lclean:
 	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
-	@rm -f $(DV_NAME)
+	@rm -f $(DV)
+	@rm -f $(WYKI)
+	@rm -f $(notdir $(WYKI))
+	@rm -f $(MANY)
 	@echo "\033[91;1mFiller binary removed\033[0m";
 
 aclean: fclean
